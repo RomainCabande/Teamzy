@@ -3,37 +3,83 @@ body{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     height: fit-content;
-    background-image:url('images/BGLogin.png');
+    background-image: rgb(255, 255, 255,0.25) ,url('images/BGLogin.png');
     background-size:content;
     overflow: hidden;
 }
 #loginContainer{
     background-color: rgba(0, 0, 0, 0.452);
-    display: absolute;
-    height: fit-content;
+    height: 65%;
     width: fit-content;
     padding: 30px;
-    border-radius: 20%;
+    border-radius: 75px;
     margin-left: 20%;
     margin-top: 20%;
     text-align: center;
+    align-items: center;
     grid-column: 2;
     width: 50%;
+    color: white;
 }
-imageContainer{
-    grid-column: 1;
+#loginContainer input{
+    width: 80%;
+    height: 50px;
+    border-radius: 20px;
+    box-shadow: none;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10%;
+    border: 3px solid #ffffff;
+    background-color: rgba(240, 248, 255, 0.188);
 }
-#illus{
-    display: absolute;
-    height: 45%;
-    margin-left: -70px;
-    margin-top: 100px;
+#loginContainer input::placeholder{
+    font-weight: bold;
+    opacity: .25;
+    font-size: 15px;
+    color: rgb(240, 240, 240);
+    margin-left: 5%;
 }
-illusContainer{
+#loginContainer #submit{
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    padding: 5% ;
+    font-size: 20px;
+    border-radius: 50px;
+    background-color: #006e8c;
+    color: white;
+    border: none;
+    border: 5px solid #006e8c;
+}
+#loginContainer #submit:hover{
+    background-color: #029bc600;
+    border: #006e8c 5px solid;
+}
+#loginContainer h1{
+    font-size: 45px;
+    font-style: bold;
+}
+#loginContainer div{
+    width: 100%;
+    text-align: left;
     
 }
+#loginContainer div label{
+    position: relative;
+    left: 35px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+}
+#illus{
+    position: absolute;
+    height: 65%;
+    top: 50%;
+    left: -3%;
+}
 #logo{
-    margin-top: 20%;
-    margin-left: 10%;
+    position: absolute;
+    top: 20%;
+    left:10%;
     width: 120px;
 }
