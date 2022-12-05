@@ -132,6 +132,10 @@ body{
 #accueil header img{
     height: 100px;
 }
+#accueil header #iconUser:hover{
+    position: absolute;
+    height: 110px;
+}
 #accueil header a{
     text-decoration: none;
     color:#454c55;
