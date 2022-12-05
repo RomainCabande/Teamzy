@@ -126,6 +126,8 @@ body{
     background-color: white;
     position: sticky;
     top: 0px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 #accueil header img{
     height: 100px;
@@ -134,13 +136,18 @@ body{
     text-decoration: none;
     color:#454c55;
     font-size: 30px;
-    font-weight: bolder;
+    font-weight:bolder;
     margin-left: 2em;
     margin-top: auto;
     margin-bottom: auto;
 }
+#accueil header #iconUser{
+    margin: 1%;
+    margin-left: 12%;
+}
 #accueil header #logo{
-    margin-right: 20%;
+    margin: 1%;
+    margin-right: 40%;
 }
 #accueil body p{
     margin-top: 110%;
