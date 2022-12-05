@@ -1,5 +1,8 @@
 body{
     font-family: Helvetica;
+}
+#index body{
+    font-family: Helvetica;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     height: fit-content;
@@ -7,21 +10,22 @@ body{
     background-size:content;
     overflow: hidden;
 }
-#loginContainer{
+#index #loginContainer{
     background-color: rgba(0, 0, 0, 0.452);
     height: 65%;
     width: fit-content;
     padding: 30px;
     border-radius: 75px;
     margin-left: 20%;
-    margin-top: 20%;
+    margin-top: auto;
+    margin-bottom: auto;
     text-align: center;
     align-items: center;
     grid-column: 2;
     width: 50%;
     color: white;
 }
-#loginContainer input{
+#index #loginContainer input{
     width: 80%;
     height: 50px;
     border-radius: 20px;
@@ -32,14 +36,14 @@ body{
     border: 3px solid #ffffff;
     background-color: rgba(240, 248, 255, 0.188);
 }
-#loginContainer input::placeholder{
+#index #loginContainer input::placeholder{
     font-weight: bold;
     opacity: .25;
     font-size: 15px;
     color: rgb(240, 240, 240);
     margin-left: 5%;
 }
-#loginContainer #submit{
+#index #loginContainer #submit{
     position: relative;
     width: fit-content;
     height: fit-content;
@@ -51,35 +55,93 @@ body{
     border: none;
     border: 5px solid #006e8c;
 }
-#loginContainer #submit:hover{
+#index #loginContainer #submit:hover{
     background-color: #029bc600;
     border: #006e8c 5px solid;
 }
-#loginContainer h1{
+#index #loginContainer h1{
     font-size: 45px;
     font-style: bold;
 }
-#loginContainer div{
+#index #loginContainer div{
     width: 100%;
     text-align: left;
     
 }
-#loginContainer div label{
+#index #loginContainer div label{
     position: relative;
     left: 35px;
     width: 100%;
     font-size: 20px;
     font-weight: bold;
 }
-#illus{
+#index #illus{
     position: absolute;
     height: 65%;
     top: 50%;
     left: -3%;
 }
-#logo{
+#index #logo{
     position: absolute;
-    top: 20%;
-    left:10%;
-    width: 120px;
+    top: 10%;
+    left: 5%;
+    width: 40%;
+}
+@media screen and (max-width: 426px){
+    #index body{
+        display: flex;
+        width: 100%;
+        border:  1px solid black;
+    }
+    #index #logo {
+        position: absolute; /* postulat de départ */
+        top: 10%;
+        left: 50%; /* à 50%/50% du parent référent */
+        transform: translate(-50%, -50%);
+    }
+    #index #illus{
+        height: 30%;
+        top: 65%;
+    }
+    #index #loginContainer{
+        border:  1px solid black;
+        width: 75%;
+        height: fit-content;
+        margin: 0 auto;
+        margin-top: 50%;
+    }
+}
+@media screen and (max-width: 320px){
+    #index #illus{
+        height: 25%;
+    }
+}
+#accueil body{
+    background-color: #3999ae;
+    margin: 0;
+}
+#accueil header{
+    display: flex;
+    margin: 0;
+    background-color: white;
+    position: sticky;
+    top: 0px;
+}
+#accueil header img{
+    height: 100px;
+}
+#accueil header a{
+    text-decoration: none;
+    color:#454c55;
+    font-size: 30px;
+    font-weight: bolder;
+    margin-left: 2em;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#accueil header #logo{
+    margin-right: 20%;
+}
+#accueil body p{
+    margin-top: 110%;
 }
