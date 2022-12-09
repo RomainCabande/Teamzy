@@ -186,9 +186,10 @@ input[type="password"]{
     margin-top: 4%;
     margin-left: 4%;
 }
-#accueil #contentContener table {
+#accueil #contentContener #statVictoire {
     position: absolute;
     border: solid 3px black;
+    background-color: #3999ae;
     border-radius: 40px;
     height: fit-content;
     width: 85%;
@@ -199,5 +200,6 @@ input[type="password"]{
 #accueil #contentContener td{
     border: solid 3px black;
     border-radius: 40px;
+    background-color: white;
     margin: 5em;
 }
