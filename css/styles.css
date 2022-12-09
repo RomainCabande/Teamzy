@@ -163,8 +163,18 @@ input[type="password"]{
 }
 #accueil header #logo{
     margin: 1%;
-    margin-right: 40%;
+    margin-right: 39%;
 }
+#accueil header .headerLink{
+    padding: 1%;
+}
+#accueil header .headerLink:hover{
+    background-color: #3999ae;
+    color: white;
+    padding: 1%;
+    border-radius: 30px;
+}
+
 #accueil body p{
     margin-top: 110%;
 }
@@ -182,28 +192,30 @@ input[type="password"]{
     font-size: 4em;
     width: fit-content;
     height: fit-content;
-    border: solid 1px black;
     margin-top: 4%;
     margin-left: 4%;
 }
 #accueil #contentContener #statVictoire {
     position: absolute;
-    border: solid 3px black;
     background-color: #3999ae;
     border-radius: 40px;
-    height: fit-content;
     width: 85%;
-    margin-top: 12%;
+    margin-top: 14%;
     left: 50%; /* à 50%/50% du parent référent */
     transform: translate(-50%, -50%);
+    padding: 1%;
 }
 #accueil #contentContener td{
-    border: solid 3px black;
     border-radius: 40px;
+    width: fit-content;
     background-color: white;
-    margin: 5em;
+    text-align: center;
+    font-size: 2em;
 }
-
+#accueil #contentContener th{
+    width: fit-content;
+    font-size: 2em;
+}
 #pagejoueur #contentContener #tablejoueur {
     position: absolute;
     border: solid 3px black;
