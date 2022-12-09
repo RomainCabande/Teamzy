@@ -39,9 +39,17 @@ body{
 #index #loginContainer input::placeholder{
     font-weight: bold;
     opacity: .25;
-    font-size: 15px;
+    font-size: 20px;
     color: rgb(240, 240, 240);
     margin-left: 5%;
+}
+input[type="text"]{
+    font-size:20px;
+    color: white;
+}
+input[type="password"]{
+    font-size:20px;
+    color: white;
 }
 #index #loginContainer #submit{
     position: relative;
@@ -132,10 +140,7 @@ body{
 #accueil header img{
     height: 100px;
 }
-#accueil header #iconUser:hover{
-    position: absolute;
-    height: 110px;
-}
+
 #accueil header a{
     text-decoration: none;
     color:#454c55;
@@ -146,8 +151,15 @@ body{
     margin-bottom: auto;
 }
 #accueil header #iconUser{
+    position: absolute;
+    height: 70%;
     margin: 1%;
-    margin-left: 12%;
+    left: 90%;
+    top: 6%;
+}
+#accueil header #iconUser:hover{
+    position: absolute;
+    height: 72%;
 }
 #accueil header #logo{
     margin: 1%;
@@ -187,5 +199,5 @@ body{
 #accueil #contentContener td{
     border: solid 3px black;
     border-radius: 40px;
-    margin: 1em;
+    margin: 5em;
 }
