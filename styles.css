@@ -156,3 +156,36 @@ body{
 #accueil body p{
     margin-top: 110%;
 }
+#accueil #contentContener {
+    display: flex;
+    background-color: white;
+    width: 92%;
+    height: 75%;
+    border-radius: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+#accueil #contentContener h1 {
+    font-weight: bolder;
+    font-size: 4em;
+    width: fit-content;
+    height: fit-content;
+    border: solid 1px black;
+    margin-top: 4%;
+    margin-left: 4%;
+}
+#accueil #contentContener table {
+    position: absolute;
+    border: solid 3px black;
+    border-radius: 40px;
+    height: fit-content;
+    width: 85%;
+    margin-top: 12%;
+    left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%);
+}
+#accueil #contentContener td{
+    border: solid 3px black;
+    border-radius: 40px;
+    margin: 1em;
+}
