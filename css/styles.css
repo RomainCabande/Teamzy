@@ -227,3 +227,41 @@ input[type="password"]{
     left: 50%; /* à 50%/50% du parent référent */
     transform: translate(-50%, -50%);
 }
+footer{
+    background-color: white;
+    margin-top: 5%;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    display: flex;
+    height: 15em;
+}
+footer #reseaux {
+    display: flex;
+    height: fit-content;
+    border: black 1px solid;
+}
+footer #reseaux p{
+    margin-top: 1%; 
+}
+footer #info {
+    margin: 3%;
+    width: 30%;
+    height: fit-content;
+}
+footer #info p {
+    margin:  5%;
+    font-size: 20px;
+}
+footer #info p:hover {
+    margin:  5%;
+    font-size: 20px;
+    font-weight: bold;
+}
+footer #droit {
+    display: flex;
+    height: fit-content;
+    border: black 1px solid;
+}
+footer #droit p{
+    margin-top: 1%;
+}
