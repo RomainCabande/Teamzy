@@ -128,7 +128,7 @@ input[type="password"]{
     background-color: #3999ae;
     margin: 0;
 }
-#accueil header{
+header{
     display: flex;
     margin: 0;
     background-color: white;
@@ -137,11 +137,11 @@ input[type="password"]{
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
-#accueil header img{
+header img{
     height: 100px;
 }
 
-#accueil header a{
+header a{
     text-decoration: none;
     color:#454c55;
     font-size: 30px;
@@ -150,31 +150,31 @@ input[type="password"]{
     margin-top: auto;
     margin-bottom: auto;
 }
-#accueil header #iconUser{
+header #iconUser{
     position: absolute;
     height: 70%;
     margin: 1%;
     left: 90%;
     top: 6%;
 }
-#accueil header #iconUser:hover{
+header #iconUser:hover{
     position: absolute;
     height: 72%;
 }
-#accueil header #logo{
-    margin: 1%;
-    margin-right: 39%;
-}
-#accueil header .headerLink{
+
+header .headerLink{
     padding: 1%;
 }
-#accueil header .headerLink:hover{
+header .headerLink:hover{
     background-color: #3999ae;
     color: white;
     padding: 1%;
     border-radius: 30px;
 }
-
+header #lg{
+    margin: 1%;
+    margin-right: 39%;
+}
 #accueil body p{
     margin-top: 110%;
 }
