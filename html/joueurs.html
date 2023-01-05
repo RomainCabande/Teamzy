@@ -8,15 +8,15 @@
     <link rel="icon" href="../images/logo_teamzy.png">
 </head>
 <header>
-        <img src="../images/logo_teamzy+text.png" alt="logo haut de page" id="logo">
-        <a href="joueurs.html">Joueurs</a>
-        <a href="#">Matchs</a>
-        <img src="../images/user-icon.png" alt="votre compte" id="iconUser">
+    <img src="../images/logo_teamzy+text.png" alt="logo haut de page" id="logo">
+    <a href="joueurs.html" class="headerLink">Joueurs</a>
+    <a href="#" class="headerLink">Matchs</a>
+    <img src="../images/user-icon.png" alt="votre compte" id="iconUser">
 </header>
 <body id="pageJoueur">
     <div id="contentContener">
         <h1>Joueurs</h1>
-        <table id="tableJoueur">
+        <table id="tablejoueur">
             <thead>
                 <tr>
                     <th>Prénom</th>
@@ -25,18 +25,37 @@
                 </tr>
             </thead>
             <tbody>
-                <tr onclick="location.href='../accueil.html'">
+                <tr onclick="location.href='profil.html'">
                     <td >Hugo</td>
-                    <td>Lioris</td>
+                    <td>Lloris</td>
                     <td>Gardien</td>
                 </tr>
-                <tr>
-                    <td>Hugo</td>
-                    <td>Lioris</td>
-                    <td>Gardien</td>
+                <tr onclick="location.href='profil.html'">
+                    <td>Romain</td>
+                    <td>Cabande</td>
+                    <td>Giga BG</td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <footer>
+        <div id="info">
+            <p>Nous Contacter</p>
+            <p>Politique des données</p>
+            <p>Termes et conditions</p>
+        </div>
+        <div id="reseaux">
+            <p>Nos reseaux</p>
+            <div id="logoReseau">
+                <img src="../images/facebook.svg" alt="">
+                <img src="../images/twitter.svg" alt="">
+                <img src="" alt=""> 
+            </div>
+            
+        </div>
+        <div id="droit">
+            <p>tous droits reservé 2022 Teamzy.com Inc ©</p>
+        </div>
+    </footer>
 </body>
 </html>

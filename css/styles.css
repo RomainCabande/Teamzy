@@ -216,17 +216,40 @@ input[type="password"]{
     width: fit-content;
     font-size: 2em;
 }
+
 #pagejoueur #contentContener #tablejoueur {
     position: absolute;
-    border: solid 3px black;
     background-color: #3999ae;
     border-radius: 40px;
-    height: fit-content;
     width: 85%;
-    margin-top: 12%;
+    margin-top: 14%;
     left: 50%; /* à 50%/50% du parent référent */
     transform: translate(-50%, -50%);
+    padding: 1%;
 }
+
+#profil #contentContener {
+    display: flex;
+    background-color: white;
+    width: 92%;
+    height: 75%;
+    border-radius: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+#profil #contentContener p{
+    position: absolute;
+    background-color: #3999ae;
+    border-radius: 40px;
+    width: 85%;
+    margin-top: 15%;
+    left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%);
+    padding: 1%;
+    font-size: 2em;
+}
+
 footer{
     background-color: white;
     margin-top: 5%;
