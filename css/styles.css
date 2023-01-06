@@ -255,28 +255,40 @@ footer{
     margin-top: 5%;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
+    flex-wrap: wrap;
+}
+#grid-footer {
     display: flex;
-    height: 15em;
+    width: 100%;
 }
 footer #reseaux {
-    display: flex;
-    height: fit-content;
-    border: black 1px solid;
+    width: 50%;
+    height: 60%;
 }
 footer #reseaux #logoReseau{
-    size: 100px;
+    text-align: center;
+    height: 10em;
+}
+footer #reseaux img{
+    width: 4em;
+    margin: 5%;
+}
+footer #reseaux img:hover{
+    width: 4.5em;
+    margin: 5%;
 }
 footer #reseaux p{
     margin-top: 1%; 
+    text-align: center;
 }
 footer #info {
-    margin: 3%;
-    width: 30%;
-    height: fit-content;
+    width: 50%;
+    height: 20%;
 }
 footer #info p {
     margin:  5%;
     font-size: 20px;
+    text-align: center;
 }
 footer #info p:hover {
     margin:  5%;
@@ -286,8 +298,11 @@ footer #info p:hover {
 footer #droit {
     display: flex;
     height: fit-content;
-    border: black 1px solid;
 }
 footer #droit p{
     margin-top: 1%;
+    text-align: center;
+    font-size: 1em;
+    font-style: italic;
+    width: 100%;
 }
