@@ -228,6 +228,19 @@ header #lg{
     padding: 1%;
 }
 
+#pagejoueur #contentContener td{
+    border-radius: 40px;
+    width: fit-content;
+    background-color: white;
+    text-align: center;
+    font-size: 2em;
+}
+
+#pagejoueur #contentContener .ligneJoueur:hover td{
+    background-color: lightslategrey;
+    color: white;
+}
+
 #profil #contentContener {
     display: flex;
     background-color: white;
