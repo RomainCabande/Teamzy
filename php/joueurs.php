@@ -16,10 +16,9 @@
 <body id="pageJoueur">
     <div id="contentContener">
         <h1>Joueurs</h1>
-        </form>
+        <form id="recherche">
             <h1>Rechercher  : </h1>
             <form method="post" action="recherche.php">
-                <label for="recherche">Votre recherche :</label>
                 <input type="search" name="search" placeholder="Rechercher ...">
                 <input type="submit" value="envoyer">
                 <input type="reset" value="vider">
@@ -33,20 +32,13 @@
                 </tr>
             </thead>
             <?PHP
-                ///Connexion au serveur MySQL
                 $keyword = $_POST['search'];
-                $server = "localhost";
-                $login = "root";
-                $mdp = "";
-                $db = "section4";
                 ///Connexion au serveur MySQL
-                try {
+                
                     $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
-                    }
+                
                 ///Capture des erreurs éventuelles
-                catch (Exception $e) {
-                    die('Erreur : ' . $e->getMessage());
-                    }
+            
                 
                 /* 
                 $res = $bdd->prepare("SELECT * FROM contact ");

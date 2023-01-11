@@ -124,7 +124,7 @@ input[type="password"]{
         height: 25%;
     }
 }
-#accueil body{
+body{
     background-color: #3999ae;
     margin: 0;
 }
@@ -175,7 +175,7 @@ header #lg{
     margin: 1%;
     margin-right: 39%;
 }
-#accueil body p{
+body p{
     margin-top: 110%;
 }
 #accueil #contentContener {
@@ -187,7 +187,7 @@ header #lg{
     margin: 0 auto;
     margin-top: 5%;
 }
-#accueil #contentContener h1 {
+#contentContener h1 {
     font-weight: bolder;
     font-size: 4em;
     width: fit-content;
@@ -205,18 +205,20 @@ header #lg{
     transform: translate(-50%, -50%);
     padding: 1%;
 }
-#accueil #contentContener td{
+#contentContener td{
     border-radius: 40px;
     width: fit-content;
     background-color: white;
     text-align: center;
     font-size: 2em;
 }
-#accueil #contentContener th{
+#contentContener th{
     width: fit-content;
     font-size: 2em;
 }
-
+#pagejoueur #contentContener{
+    flex-wrap: wrap ;
+}
 #pagejoueur #contentContener #tablejoueur {
     position: absolute;
     background-color: #3999ae;
@@ -226,6 +228,9 @@ header #lg{
     left: 50%; /* à 50%/50% du parent référent */
     transform: translate(-50%, -50%);
     padding: 1%;
+}
+#pagejoueur #contentContener #recherche{
+    border: black solid 1px;
 }
 
 #pagejoueur #contentContener td{
