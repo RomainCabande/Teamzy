@@ -55,14 +55,14 @@
                 $data = $res->fetchAll();
                 print_r($data);
                 */
-                $res = $bdd->prepare("SELECT j.* FROM joueurs as j WHERE concat(nom,prenom,poste) LIKE '%$keyword%'");
+                $res = $bdd->prepare("SELECT j.* FROM joueur as j WHERE concat(nom,prenom,poste_prefere,numero_licence) LIKE '%$keyword%'");
                 $res->execute();
                 // while ($row = $res->fetch()) {
                 //     echo"<tr><td>{$row['nom']}</td><td>{$row['prenom']}</td><td>{$row['adresse']}
                 //     </td><td>{$row['codepostal']}</td><td>{$row['ville']}</td><td>{$row['telephone']}</td>\n";
                 // }
                 foreach ($res as $row){
-                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste']}</td><td><a href='profil.php?id={$row['id_joueur']}'>profil</a></td>\n";
+                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='profil.php?id={$row['numero_licence']}'>profil</a></td>\n";
                 }
             ?>
         </table>
