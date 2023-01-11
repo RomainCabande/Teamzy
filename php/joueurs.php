@@ -8,8 +8,8 @@
     <link rel="icon" href="../images/logo_teamzy.png">
 </head>
 <header>
-    <a href="accueil.html" id="lg"><img src="../images/logo_teamzy+text.png" alt="logo haut de page"></a>
-    <a href="joueurs.html" class="headerLink">Joueurs</a>
+    <a href="accueil.php" id="lg"><img src="../images/logo_teamzy+text.png" alt="logo haut de page"></a>
+    <a href="joueurs.php" class="headerLink">Joueurs</a>
     <a href="#" class="headerLink">Matchs</a>
     <img src="../images/user-icon.png" alt="votre compte" id="iconUser">
 </header>
@@ -68,22 +68,23 @@
         </table>
     </div>
     <footer>
-        <div id="info">
-            <p>Nous Contacter</p>
-            <p>Politique des données</p>
-            <p>Termes et conditions</p>
-        </div>
-        <div id="reseaux">
-            <p>Nos reseaux</p>
-            <div id="logoReseau">
-                <img src="../images/facebook.svg" alt="">
-                <img src="../images/twitter.svg" alt="">
-                <img src="" alt=""> 
+        <div id="grid-footer">
+            <div id="info">
+                <p>Nous Contacter</p>
+                <p>Politique des données</p>
+                <p>Termes et conditions</p>
             </div>
-            
+            <div id="reseaux">
+                <p>Nos reseaux</p>
+                <div id="logoReseau">
+                    <img src="../images/facebook.svg" alt="">
+                    <img src="../images/twitter.svg" alt="">
+                    <img src="../images/Instagram.svg" alt=""> 
+                </div>    
+            </div>
         </div>
         <div id="droit">
-            <p>tous droits reservé 2022 Teamzy.com Inc ©</p>
+            <p>Tous droits reservé 2022 Teamzy.com Inc ©</p>
         </div>
     </footer>
 </body>
