@@ -8,8 +8,8 @@
     <link rel="icon" href="../images/logo_teamzy.png">
 </head>
 <header>
-    <a href="accueil.html" id="lg"><img src="../images/logo_teamzy+text.png" alt="logo haut de page"></a>
-    <a href="joueurs.html" class="headerLink">Joueurs</a>
+    <a href="accueil.php" id="lg"><img src="../images/logo_teamzy+text.png" alt="logo haut de page"></a>
+    <a href="joueurs.php" class="headerLink">Joueurs</a>
     <a href="#" class="headerLink">Matchs</a>
     <img src="../images/user-icon.png" alt="votre compte" id="iconUser">
 </header>
@@ -41,7 +41,7 @@
                 $db = "section4";
                 ///Connexion au serveur MySQL
                 try {
-                    $bdd = new PDO("mysql:host=$server;dbname=$db",$login, $mdp);
+                    $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
                     }
                 ///Capture des erreurs éventuelles
                 catch (Exception $e) {
@@ -55,15 +55,14 @@
                 $data = $res->fetchAll();
                 print_r($data);
                 */
-                $res = $bdd->prepare("SELECT * FROM contact WHERE concat(nom,prenom,adresse,codepostal,ville,telephone,id_contact) LIKE '%$keyword%'");
+                $res = $bdd->prepare("SELECT j.prenom , j.nom , j.poste FROM joueurs as j WHERE concat(nom,prenom,poste) LIKE '%$keyword%'");
                 $res->execute();
                 // while ($row = $res->fetch()) {
                 //     echo"<tr><td>{$row['nom']}</td><td>{$row['prenom']}</td><td>{$row['adresse']}
                 //     </td><td>{$row['codepostal']}</td><td>{$row['ville']}</td><td>{$row['telephone']}</td>\n";
                 // }
                 foreach ($res as $row){
-                    echo"<tr><td>{$row['nom']}</td><td>{$row['prenom']}</td><td>{$row['adresse']}
-                    </td><td>{$row['codepostal']}</td><td>{$row['ville']}</td><td>{$row['telephone']}</td><td> <a href='modification.php?id={$row['id_contact']}'>modifier</a></td>\n";
+                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste']}</td><a href='modification.php?id={$row['id_contact']}'>modifier</a></td>\n";
                 }
             ?>
         </table>
