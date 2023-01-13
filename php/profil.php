@@ -17,15 +17,35 @@
     <div id="contentContener">
         <h1>Profil</h1>
         <p> Nom :
+        <input type="search" name="nom">
             <br>
             Prénom :
+            <input type="search" name="prenom">
+            <br>
+            Date de naissance :
+            <br>
+            taille :
+            <br>
+            poids :
+            <br>
+            Statut :
             <br>
             Poste :
+            <input type="search" name="poste">
             <br>
             Note moyenne en match :
             <br>
             commentaires :
         </p>
+        <img src="../images/joueur.png" alt="photo du joueur" id="ppjoueur"> 
+        <table id="tableCommentaires">
+            <tr>
+                <th>Date</th>
+                <th>Note</th>
+                <th>commentaire</th>
+            </tr>
+        </table>
+
     </div>
     <footer>
         <div id="grid-footer">
