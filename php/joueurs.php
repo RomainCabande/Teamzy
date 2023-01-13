@@ -15,13 +15,15 @@
 </header>
 <body id="pageJoueur">
     <div id="contentContener">
-        <h1>Joueurs</h1>
+        <div id="head">
+            <h1>Joueurs</h1>
+            <a id="btnAdd" href="#">Ajouter un joueur</a>
+        </div>
+        
         <form id="recherche">
-            <h1>Rechercher  : </h1>
-            <form method="post" action="recherche.php">
+            <form method="post" action="recherche.php" >
                 <input type="search" name="search" placeholder="Rechercher ...">
-                <input type="submit" value="envoyer">
-                <input type="reset" value="vider">
+                <input type="submit" value="Rechercher">
         </form>	
         <table id="tablejoueur">
             <thead>
@@ -32,29 +34,35 @@
                 </tr>
             </thead>
             <?PHP
-                $keyword = $_POST['search'];
                 ///Connexion au serveur MySQL
-                
-                    $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
-                
-                ///Capture des erreurs éventuelles
-            
-                
-                /* 
-                $res = $bdd->prepare("SELECT * FROM contact ");
-                $res->execute();
-                
-                $data = $res->fetchAll();
-                print_r($data);
-                */
-                $res = $bdd->prepare("SELECT j.* FROM joueur as j WHERE concat(nom,prenom,poste_prefere,numero_licence) LIKE '%$keyword%'");
-                $res->execute();
+                $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
+                if(isset($_POST['search'])){
+                    
+                    $keyword = $_POST['search'];
+                    /* 
+                    $res = $bdd->prepare("SELECT * FROM contact ");
+                    $res->execute();
+                    
+                    $data = $res->fetchAll();
+                    print_r($data);
+                    */
+                    
+                    $res = $bdd->prepare("SELECT j.* FROM joueur as j WHERE concat(nom,prenom,poste_prefere,numero_licence) LIKE '?'");
+                    $res->execute(array($keyword));
+                }else{
+                    $res = $bdd->prepare("SELECT joueur.* FROM joueur");
+                    $res->execute();
+                    foreach ($res as $row){
+                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='profil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a></td>\n";
+                }
+                }
+
                 // while ($row = $res->fetch()) {
                 //     echo"<tr><td>{$row['nom']}</td><td>{$row['prenom']}</td><td>{$row['adresse']}
                 //     </td><td>{$row['codepostal']}</td><td>{$row['ville']}</td><td>{$row['telephone']}</td>\n";
                 // }
                 foreach ($res as $row){
-                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='profil.php?id={$row['numero_licence']}'>profil</a></td>\n";
+                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='profil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a></td>\n";
                 }
             ?>
         </table>

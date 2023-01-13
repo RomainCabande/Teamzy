@@ -6,7 +6,7 @@ body{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     height: fit-content;
-    background-image: rgb(255, 255, 255,0.25) ,url('images/BGLogin.png');
+    background-image: rgb(255, 255, 255,0.25) ,url('../images/BGLogin.png');
     background-size:content;
     overflow: hidden;
 }
@@ -99,7 +99,6 @@ input[type="password"]{
     #index body{
         display: flex;
         width: 100%;
-        border:  1px solid black;
     }
     #index #logo {
         position: absolute; /* postulat de départ */
@@ -112,7 +111,6 @@ input[type="password"]{
         top: 65%;
     }
     #index #loginContainer{
-        border:  1px solid black;
         width: 75%;
         height: fit-content;
         margin: 0 auto;
@@ -216,21 +214,64 @@ body p{
     width: fit-content;
     font-size: 2em;
 }
+#contentContener td img{
+    height: 1em;
+}
 #pagejoueur #contentContener{
-    flex-wrap: wrap ;
+    display: table;
 }
 #pagejoueur #contentContener #tablejoueur {
-    position: absolute;
     background-color: #3999ae;
     border-radius: 40px;
     width: 85%;
     margin-top: 14%;
-    left: 50%; /* à 50%/50% du parent référent */
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
     padding: 1%;
 }
-#pagejoueur #contentContener #recherche{
-    border: black solid 1px;
+#pagejoueur #contentContener #head{
+    display: flex;
+}
+#pagejoueur #contentContener #btnAdd{
+    color: white;
+    font-size: 25px;
+    font-weight: bolder;
+    height: 10%;
+    width: fit-content;
+    padding: 1%;
+    text-decoration: none;
+    border-radius: 40px;
+    background-color: #006e8c;
+    margin-top: 5%;
+    margin-left: 55%;
+}
+#pagejoueur #contentContener #btnAdd:hover{
+    background-color: white ;
+    color: #006e8c;
+    border: solid 5px #006e8c;
+}
+#pagejoueur #recherche input{
+    font-size: 1em;
+    border-radius: 2em;
+    padding: 1%;
+}
+#pagejoueur #recherche input[type=submit]{
+    background-color: #006e8c;
+    border: none;
+    color: white;
+    font-weight: bolder;
+}
+#pagejoueur #recherche input[type=submit]:hover{
+    background-color: white ;
+    color: #006e8c;
+    border: solid 3px #006e8c;
+}
+
+#pagejoueur #recherche input[type=search]{ 
+    margin-left: 8%;
+    width: 25%;
+}
+#pagejoueur #recherche input[type=search]:focus{
+    border: solid 3px #006e8c;
 }
 
 #pagejoueur #contentContener td{
