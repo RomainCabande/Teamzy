@@ -1,4 +1,12 @@
-<html lang="en" id="accueil">
+<?PHP
+    $id = $_GET['id'];
+    $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
+    $req = $bdd->prepare("SELECT * from joueur where numero_licence = ".$id);
+    $req->execute();
+    $data = $req->fetch(PDO::FETCH_NUM);
+        
+?>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,28 +24,52 @@
 <body id="profil">
     <div id="contentContener">
         <h1>Profil</h1>
-        <p> Nom :
-        <input type="search" name="nom">
-            <br>
-            Prénom :
-            <input type="search" name="prenom">
-            <br>
-            Date de naissance :
-            <br>
-            taille :
-            <br>
-            poids :
-            <br>
-            Statut :
-            <br>
-            Poste :
-            <input type="search" name="poste">
-            <br>
-            Note moyenne en match :
-            <br>
-            commentaires :
-        </p>
-        <img src="../images/joueur.png" alt="photo du joueur" id="ppjoueur"> 
+        
+        
+        <form action="profil.php">
+            <img src="../images/<?php echo $data[3] ?>" alt="">
+           
+            <input type="file" accept="image/png, image/gif, image/jpeg">
+            
+            <div class="form-elements">
+                <label for="nom"> Nom :</label>
+                <input type="text" name="nom" value="<?php echo $data[1] ?>">
+                <label for="prenom"> Prénom :</label>
+                <input type="text" name="prenom" value="<?php echo $data[2] ?>">
+            </div>
+            <div class="form-elements">
+                <label for="date"> Date de naissance :</label>
+                <input type="date" name="date" value="<?php echo $data[4] ?>">
+                <label for="taille"> Taille (cm) :</label>
+                <input type="number" name="taille" min="0" max="250" value="<?php echo $data[5] ?>">
+            </div>
+            <div class="form-elements">
+                <label for="poid"> Poids (Kg):</label>
+                <input type="number" name="poid" min="0" max="250" value="<?php echo $data[6] ?>">
+            </div>
+            <div class="form-elements">
+                <label for="statut">Statut :</label>   
+                <select name="statut">
+                    <option value="">--Please choose an option--</option>
+                    <option value="titu">Titulaire</option>
+                    <option value="remp">Remplaçant</option>
+                    <option value="reser">Reserviste</option>
+                </select>
+                <label for="poste">Poste :</label>
+                <select name="poste">
+                    <option value="">--Please choose an option--</option>
+                    <option value="al">arrière latéral</option>
+                    <option value="md">milieu défensif</option>
+                    <option value="mo">milieu offensif</option>
+                    <option value="at">attaquant</option>
+                    <option value="gk">gardien de but</option>
+                </select>
+                
+            </div>
+            <input type="submit">
+            <p class="form-elements">Note moyenne en match :</p>
+        </form>   
+            <p>commentaires :</p> 
         <table id="tableCommentaires">
             <tr>
                 <th>Date</th>

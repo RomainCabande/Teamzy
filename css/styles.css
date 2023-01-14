@@ -43,11 +43,11 @@ body{
     color: rgb(240, 240, 240);
     margin-left: 5%;
 }
-input[type="text"]{
+#index #loginContainer input[type="text"]{
     font-size:20px;
     color: white;
 }
-input[type="password"]{
+#index #loginContainer input[type="password"]{
     font-size:20px;
     color: white;
 }
@@ -288,7 +288,7 @@ body p{
 }
 
 #profil #contentContener {
-    display: flex;
+    display: table;
     background-color: white;
     width: 92%;
     height: 75%;
@@ -296,38 +296,29 @@ body p{
     margin: 0 auto;
     margin-top: 5%;
 }
-
-#profil #contentContener p{
-    position: absolute;
-    background-color: #3999ae;
-    border-radius: 40px;
-    width: 85%;
-    margin-top: 15%;
-    left: 50%; /* à 50%/50% du parent référent */
-    transform: translate(-50%, -50%);
-    padding: 1%;
-    font-size: 2em;
+#profil #contentContener p {
+    margin: 0;
 }
-
-#profil #contentContener #ppjoueur{
-    position: absolute;
-    height: 15%;
-    margin-top: 10%;
-    margin-left: 80%;
-    border-radius: 50px;
+#profil #contentContener form .form-elements{
+    margin-top: 3%;
 }
-
-#profil #contentContener #tableCommentaires {
-    position: absolute;
-    background-color: #3999ae;
-    border-radius: 40px;
-    width: 85%;
-    margin-top: 14%;
-    left: 50%; /* à 50%/50% du parent référent */
-    transform: translate(-50%, -50%);
-    padding: 1%;
+#profil form{
+    display: table;
+    width: 80%;
+    margin: 0 auto;
 }
-
+#profil form .form-elements input,select,label{
+    font-size: 1em;
+    font-weight: bolder;
+    margin: 1%;
+}
+#profil form .form-elements input,select{
+    margin-right: 5%;
+}
+#profil form p{
+    margin: 1%;
+    width: fit-content;
+}
 footer{
     background-color: white;
     margin-top: 5%;
