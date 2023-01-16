@@ -17,7 +17,7 @@
     <div id="contentContener">
         <div id="head">
             <h1>Joueurs</h1>
-            <a id="btnAdd" href="#">Ajouter un joueur</a>
+            <a id="btnAdd" href="../php/gestionProfil.php">Ajouter un joueur</a>
         </div>
         
         <form id="recherche">
@@ -53,7 +53,7 @@
                     $res = $bdd->prepare("SELECT joueur.* FROM joueur");
                     $res->execute();
                     foreach ($res as $row){
-                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='profil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a></td>\n";
+                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a></td>\n";
                 }
                 }
 
@@ -62,7 +62,7 @@
                 //     </td><td>{$row['codepostal']}</td><td>{$row['ville']}</td><td>{$row['telephone']}</td>\n";
                 // }
                 foreach ($res as $row){
-                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='profil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a></td>\n";
+                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a></td>\n";
                 }
             ?>
         </table>
