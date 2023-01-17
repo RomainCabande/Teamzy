@@ -216,6 +216,7 @@ body p{
 }
 #contentContener td img{
     height: 1em;
+    margin-left: 5%;
 }
 #pagejoueur #contentContener{
     display: table;
@@ -287,40 +288,7 @@ body p{
     color: white;
 }
 
-#profil #contentContener {
-    display: table;
-    background-color: white;
-    width: 92%;
-    height: 75%;
-    border-radius: 40px;
-    margin: 0 auto;
-    margin-top: 5%;
-}
-#profil #contentContener p {
-    margin: 0;
-}
-#profil #contentContener form .form-elements{
-    margin-top: 3%;
-}
-#profil form{
-    display: table;
-    width: 80%;
-    margin: 0 auto;
-    border: #006e8c solid 2px;
-    margin-bottom: 2%;
-}
-#profil form .form-elements input,select,label{
-    font-size: 1em;
-    font-weight: bolder;
-    margin: 1%;
-}
-#profil form .form-elements input,select{
-    margin-right: 5%;
-}
-#profil form p{
-    margin: 1%;
-    width: fit-content;
-}
+
 #match #contentContener #tableMatchs {
     background-color: #3999ae;
     border-radius: 40px;
@@ -346,19 +314,7 @@ body p{
     padding: 1%;
 }
 
-#profil form img{
-    height: 12em;
-    border-radius: 20%;
-    background-color: #006e8c;
-    padding: 10px;
-}
-#profil form .btn{
-    font-size: 1em;
-    background-color: #006e8c;
-    border: none;
-    color: white;
-    font-weight: bolder;
-}
+
 #match #recherche input[type=submit]:hover{
     background-color: white ;
     color: #006e8c;
@@ -398,9 +354,62 @@ body p{
     border-radius: 2em;
     padding: 1%;
 }
-#profil form .btn:hover{
+#profil #contentContener {
+    display: table;
+    background-color: white;
+    width: 92%;
+    height: 75%;
+    border-radius: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+#profil #contentContener p {
+    margin: 0;
+}
+#profil #contentContener form .form-elements{
+    margin-top: 3%;
+}
+#profil form{
+    display: table;
+    width: 80%;
+    margin: 0 auto;
+    border: #006e8c solid 2px;
+    margin-bottom: 2%;
+}
+#profil form .form-elements input,select,label{
+    font-size: 1em;
+    font-weight: bolder;
+    margin: 1%;
+}
+#profil form .form-elements input,select{
+    margin-right: 5%;
+}
+#profil form p{
+    margin: 1%;
+    width: fit-content;
+}
+#profil form img{
+    height: 12em;
+    border-radius: 20%;
     background-color: #006e8c;
+    padding: 10px;
+}
+#profil form .btn{
+    font-size: 1em;
+    background-color: #006e8c;
+    border: none;
+    padding: 1%;
+    border-radius: 20px;
     color: white;
+    font-weight: bolder;
+    height: fit-content;
+    margin-top: 5%;
+}
+#profil form .btn:hover{
+    background-color: white;
+    color: #006e8c;
+    border: #006e8c solid 3px;
+
 }
 #profil #pic{
     display: flex;
@@ -410,6 +419,7 @@ body p{
 #profil #info{
     padding: 2%;
     border-radius: 2em;
+    height: 440px;
 }
 #profil #pic div{
     display: block;
@@ -421,7 +431,9 @@ body p{
 }
 #profil #pic input[type=submit]{
     height: fit-content;
+    
 }
+
 footer{
     background-color: white;
     margin-top: 5%;
@@ -429,7 +441,6 @@ footer{
     border-top-right-radius: 40px;
     flex-wrap: wrap;
 }
-
 #grid-footer {
     display: flex;
     width: 100%;

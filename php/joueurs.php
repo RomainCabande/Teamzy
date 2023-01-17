@@ -1,3 +1,14 @@
+<?php
+    if(isset($_GET['id'])){
+        $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
+        $req = $bdd->prepare("DELETE FROM joueur
+        WHERE numero_licence = ?");
+        $req->execute(array($_GET['id']));
+    }
+
+
+?>
+
 <html lang="en" id="accueil">
 <head>
     <meta charset="UTF-8">
@@ -53,7 +64,7 @@
                     $res = $bdd->prepare("SELECT joueur.* FROM joueur");
                     $res->execute();
                     foreach ($res as $row){
-                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a></td>\n";
+                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='joueurs.php?id={$row['numero_licence']}'><img src='../images/supp.svg' alt=''></a><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a><a href='Profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
                 }
                 }
 
@@ -62,7 +73,7 @@
                 //     </td><td>{$row['codepostal']}</td><td>{$row['ville']}</td><td>{$row['telephone']}</td>\n";
                 // }
                 foreach ($res as $row){
-                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a></td>\n";
+                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='joueurs.php?id={$row['numero_licence']}'><img src='../images/supp.svg' alt=''></a><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a><a href='Profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
                 }
             ?>
         </table>

@@ -1,17 +1,56 @@
 <?PHP
     $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
     if(isset($_GET['id'])){
-        $id = $_GET['id'];
-        $req = $bdd->prepare("SELECT * from joueur where numero_licence = ?");
-        $req->execute(array($id));
-        $data = $req->fetch(PDO::FETCH_NUM);
-        $poste ="$data[8]";
-        $statu = "$data[7]";
+        if(strcmp($_GET['id'],"add") == 0){
+            echo "ici";
+            $add = $bdd->prepare("INSERT INTO joueur(nom, prenom,taille,poids,date_naissance,statut,poste_prefere)
+            VALUES(:nom, :prenom, :taille, :poid, :dn, :statut, :poste)");
+            ///Exécution de la requête
+            $add->execute(array('nom' => $_GET['nom'],
+                                    'prenom'=> $_GET['prenom'],
+                                    'taille'=> $_GET['taille'],
+                                    'poid'=> $_GET['poid'],
+                                    'dn' => $_GET['date'],
+                                    'statut' => $_GET['statut'],
+                                    'poste' => $_GET['poste']
+                                    ));
+            echo "yesss";
+            $req = $bdd->prepare("SELECT * from joueur where nom = ?");
+            $req->execute(array($_GET['nom']));
+            $data = $req->fetch(PDO::FETCH_NUM);
+            echo  $data[8];
+            $poste ="$data[8]";
+            echo $poste;
+            $statu = "$data[7]";
+        }elseif(!strcmp($_GET['id'],"add") == 0){
+            $id = $_GET['id'];
+            $req = $bdd->prepare("SELECT * from joueur where numero_licence = ?");
+            $req->execute(array($id));
+            $data = $req->fetch(PDO::FETCH_NUM);
+            $poste ="$data[8]";
+            $statu = "$data[7]";
+            if(isset($_GET['nom'])){
+                $ajout = $bdd->prepare('UPDATE joueur SET nom = :nom,prenom = :prenom,taille=:taille,poids=:poid,date_naissance = :dn,statut = :statut,poste_prefere = :poste WHERE numero_licence = :id');
+                $ajout->execute(array('nom' => $_GET['nom'],
+                                    'prenom'=> $_GET['prenom'],
+                                    'taille'=> $_GET['taille'],
+                                    'poid'=> $_GET['poid'],
+                                    'dn' => $_GET['date'],
+                                    'statut' => $_GET['statut'],
+                                    'poste' => $_GET['poste']
+                                    ,'id' => $id));
+                $req = $bdd->prepare("SELECT * from joueur where numero_licence = ?");
+                $req->execute(array($id));
+                $data = $req->fetch(PDO::FETCH_NUM);
+                $poste ="$data[8]";
+                $statu = "$data[7]";    
+            }
+        }  
     }
     if(isset($_POST['id'])){
         $id = $_POST['id'];
+        echo "oui";  
     }
-    echo isset($_FILES['avatar']);
     $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
     if(isset($_FILES['avatar']))
     { 
@@ -28,20 +67,7 @@
         $poste ="$data[8]";
         $statu = "$data[7]";
     }
-    if(isset($_POST['nom'])){
-        $ajout = $bdd->prepare('UPDATE joueur SET nom = :nom,prenom = :prenom,taille=:taille,poids=:poid WHERE numero_licence = :id');
-        echo $_GET['nom'].$_GET['prenom'].$_GET['taille'].$_GET['poid'].$id;
-        $ajout->execute(array('nom' => $_GET['nom'],
-                            'prenom'=> $_GET['prenom'],
-                            'taille'=> $_GET['taille'],
-                            'poid'=> $_GET['poid']
-                            ,'id' => $id));
-        $req = $bdd->prepare("SELECT * from joueur where numero_licence = ?");
-        $req->execute(array($id));
-        $data = $req->fetch(PDO::FETCH_NUM);
-        $poste ="$data[8]";
-        $statu = "$data[7]";
-    }
+    
 ?>    
 <html lang="en">
 <head>
@@ -61,35 +87,41 @@
 <body id="profil">
     <div id="contentContener">
         <h1>Profil</h1>
-        <form action="GestionProfil.php" method="POST" enctype="multipart/form-data" id="pic">
-            <input type="hidden" name="id" value="<?php echo $data[0] ?>">
-            <div>
-                <img src="../images/pp/<?php echo  $data[3] ?>" alt="">
-                <input name="avatar" type="file" accept="image/png, image/gif, image/jpeg"/>
-            </div>
-            <input type="submit" value="Enregistrer la nouvelle photo" class="btn">
-        </form>
+        <?php
+            if(isset($id)){
+                echo '<form action="GestionProfil.php" method="POST" enctype="multipart/form-data" id="pic">
+                    <input type="hidden" name="id" value="'.$data[0].'">
+                    <div>
+                        <img src="../images/pp/'.$data[3].'" alt="">
+                        <input name="avatar" type="file" accept="image/png, image/gif, image/jpeg"/>
+                    </div>
+                    <input type="submit" value="Enregistrer la nouvelle photo" class="btn">
+                </form>';
+            }
+            
+        ?>
+        
 
         
         <!-- The data encoding type, enctype, MUST be specified as below -->
-        
+
         <form  method="GET" action="gestionProfil.php" id="info">
             <div class="form-elements">
-            <input type="hidden" name="id" value="<?php echo  $data[0]?>">
+            <input type="hidden" name="id" value="<?php if(isset($id)){if(!strcmp($id,"add") == 0){echo  $data[0];}}else{echo "add";}?>">
                 <label for="nom"> Nom :</label>
-                <input type="text" name="nom" value="<?php echo $data[1] ?>">
+                <input type="text" name="nom" value="<?php if(isset($id)){if( !strcmp($id,"add") == 0){echo  $data[1];}} ?>">
                 <label for="prenom"> Prénom :</label>
-                <input type="text" name="prenom" value="<?php echo  $data[2] ?>">
+                <input type="text" name="prenom" value="<?php if(isset($id)){if(!strcmp($id,"add") == 0){echo  $data[2];}} ?>">
             </div>
             <div class="form-elements">
                 <label for="date"> Date de naissance :</label>
-                <input type="date" name="date" value="<?php echo  $data[4] ?>">
+                <input type="date" name="date" value="<?php if(isset($id)){if(!strcmp($id,"add") == 0){echo  $data[4];}} ?>">
                 <label for="taille"> Taille (cm) :</label>
-                <input type="number" name="taille" min="0" max="250" value="<?php echo  $data[5] ?>">
+                <input type="number" name="taille" min="0" max="250" value="<?php if(isset($id)){if(!strcmp($id,"add") == 0){echo  $data[5];}} ?>">
             </div>
             <div class="form-elements">
                 <label for="poid"> Poids (Kg):</label>
-                <input type="number" name="poid" min="0" max="250" value="<?php echo  $data[6]  ?>">
+                <input type="number" name="poid" min="0" max="250" value="<?php if(isset($id)){if(!strcmp($id,"add") == 0){echo  $data[6];}}  ?>">
             </div>
             <div class="form-elements">
                 <label for="statut">Statut :</label>   
@@ -101,25 +133,39 @@
                         }
                     ?>
                     >--Please choose an option--</option>
-                    <option value="titu"
+                    <option value="Titulaire"
                     <?php
-                        if(strcmp($statu,"Titulaire") == 0 ){
-                            echo "selected";
-                        }
+                        if(isset($id)){
+                            if(!strcmp($id,"add") == 0){
+                                if(strcmp($statu,"Titulaire") == 0 ){
+                                    echo "selected";
+                                }
+                            }
+                        }   
                     ?>
                     >Titulaire</option>
-                    <option value="remp"
+                    <option value="Remplaçant"
                     <?php
-                        if(strcmp($statu,"Remplaçant") == 0 ){
-                            echo "selected";
+                    if(isset($id)){
+                        if(!strcmp($id,"add") == 0){
+                            if(strcmp($statu,"Remplaçant") == 0 ){
+                                echo "selected";
+                            }
                         }
+                    }
+                        
+                        
                     ?>
                     >Remplaçant</option>
-                    <option value="reser"
+                    <option value="Reserviste"
                     <?php
-                        if(strcmp($statu,"Reserviste") == 0 ){
-                            echo "selected";
-                        }
+                        if(isset($id)){
+                            if(isset($id) || !strcmp($id,"add") == 0){
+                                if(strcmp($statu,"Reserviste") == 0 ){
+                                    echo "selected";
+                                }
+                            }
+                        }    
                     ?>
                     >Reserviste</option>
                 </select>
@@ -127,49 +173,80 @@
                 <select name="poste" >
                     <option value=""
                     <?php
-                        if(!isset($_GET['id'])){
-                            echo "selected";
+                        if(isset($id)){
+                            if(!strcmp($id,"add") == 0){
+                                echo "selected";
+                            }
                         }
                     ?>
                     >--Please choose an option--</option>
-                    <option value="al"
+                    <option value="arrière latéral"
                     <?php
-                        if(strcmp($poste,"arrière latéral") == 0 ){
-                            echo "selected";
-                        }
+                        if(isset($id)){
+                            if(!strcmp($id,"add") == 0){
+                                if(strcmp($poste,"arrière latéral") == 0 ){
+                                    echo "selected";
+                                }
+                            }
+                        }    
                     ?>
                     >arrière latéral</option>
-                    <option value="md"  
+                    <option value="milieu défensif"  
                     <?php
-                        if(strcmp($poste,"milieu défensif") == 0 ){
-                            echo "selected";
-                        }
+                        if(isset($id)){
+                            if(!strcmp($id,"add") == 0){
+                                if(strcmp($poste,"milieu défensif") == 0 ){
+                                    echo "selected";
+                                }
+                            }
+                        }    
                     ?>
                         >milieu défensif</option>
-                    <option value="mo"
+                    <option value="milieu offensif"
                     <?php
-                        if(strcmp($poste,"milieu offensif") == 0 ){
-                            echo "selected";
-                        }
+                        if(isset($id)){
+                            if(!strcmp($id,"add") == 0){
+                                if(strcmp($poste,"milieu offensif") == 0 ){
+                                    echo "selected";
+                                }   
+                            }
+                        }    
                     ?>
                     >milieu offensif</option>
-                    <option value="at"
+                    <option value="attaquant"
                     <?php
-                        if(strcmp($poste,"attaquant") == 0 ){
-                            echo "selected";
-                        }
+                        if(isset($id)){
+                            if(!strcmp($id,"add") == 0){
+                                if(strcmp($poste,"attaquant") == 0 ){
+                                    echo "selected";
+                                }    
+                            }
+                        }   
                     ?>
                     >attaquant</option>
-                    <option value="gk"
+                    <option value="gardien de but"
                     <?php
-                        if(strcmp($poste,"gardien de but") == 0 ){
-                            echo "selected";
+                        if(isset($id)){
+                            if(!strcmp($id,"add") == 0){
+                                if(strcmp($poste,"gardien de but") == 0 ){
+                                    echo "selected";
+                                }     
                         }
+                        }    
                     ?>
                     >gardien de but</option>
                 </select> 
             </div>
-            <input type="submit" class="btn" value="Enregistrer les modifiactions" class="form-elements">
+            <input type="submit" class="btn" value="
+            <?php
+                if(isset($_GET['id'])){
+                    echo "Enregistrer les modifiactions";    
+                }else{
+                    echo "Valider la création";
+                }
+                        
+            ?>
+            " class="form-elements">
         </form>   
     </div>
     <footer>
