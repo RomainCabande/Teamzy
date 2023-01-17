@@ -1,28 +1,27 @@
 <?PHP
     $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
     if(isset($_GET['id'])){
-        if(strcmp($_GET['id'],"add") == 0){
-            echo "ici";
-            $add = $bdd->prepare("INSERT INTO joueur(nom, prenom,taille,poids,date_naissance,statut,poste_prefere)
-            VALUES(:nom, :prenom, :taille, :poid, :dn, :statut, :poste)");
-            ///Exécution de la requête
-            $add->execute(array('nom' => $_GET['nom'],
-                                    'prenom'=> $_GET['prenom'],
-                                    'taille'=> $_GET['taille'],
-                                    'poid'=> $_GET['poid'],
-                                    'dn' => $_GET['date'],
-                                    'statut' => $_GET['statut'],
-                                    'poste' => $_GET['poste']
-                                    ));
-            echo "yesss";
-            $req = $bdd->prepare("SELECT * from joueur where nom = ?");
-            $req->execute(array($_GET['nom']));
-            $data = $req->fetch(PDO::FETCH_NUM);
-            echo  $data[8];
-            $poste ="$data[8]";
-            echo $poste;
-            $statu = "$data[7]";
-        }elseif(!strcmp($_GET['id'],"add") == 0){
+        if(isset($_GET['add'])){
+            if(strcmp($_GET['add'],"add") == 0){
+                $add = $bdd->prepare("INSERT INTO joueur(nom, prenom,taille,poids,date_naissance,statut,poste_prefere)
+                VALUES(:nom, :prenom, :taille, :poid, :dn, :statut, :poste)");
+                ///Exécution de la requête
+                $add->execute(array('nom' => $_GET['nom'],
+                                        'prenom'=> $_GET['prenom'],
+                                        'taille'=> $_GET['taille'],
+                                        'poid'=> $_GET['poid'],
+                                        'dn' => $_GET['date'],
+                                        'statut' => $_GET['statut'],
+                                        'poste' => $_GET['poste']
+                                        ));
+                $req = $bdd->prepare("SELECT * from joueur where nom = ?");
+                $req->execute(array($_GET['nom']));
+                $data = $req->fetch(PDO::FETCH_NUM);
+                $id = "$data[0]";
+                $poste ="$data[8]";
+                $statu = "$data[7]";
+            }
+        }elseif(!isset($_GET['add'])){
             $id = $_GET['id'];
             $req = $bdd->prepare("SELECT * from joueur where numero_licence = ?");
             $req->execute(array($id));
@@ -48,8 +47,7 @@
         }  
     }
     if(isset($_POST['id'])){
-        $id = $_POST['id'];
-        echo "oui";  
+        $id = $_POST['id']; 
     }
     $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
     if(isset($_FILES['avatar']))
@@ -81,10 +79,10 @@
 <header>
     <a href="accueil.php" id="lg"><img src="../images/logo_teamzy+text.png" alt="logo haut de page"></a>
     <a href="joueurs.php" class="headerLink">Joueurs</a>
-    <a href="#" class="headerLink">Matchs</a>
+    <a href="matchs.php" class="headerLink">Matchs</a>
     <img src="../images/user-icon.png" alt="votre compte" id="iconUser">
 </header>
-<body id="profil">
+<body id="Gprofil">
     <div id="contentContener">
         <h1>Profil</h1>
         <?php
@@ -107,21 +105,26 @@
 
         <form  method="GET" action="gestionProfil.php" id="info">
             <div class="form-elements">
-            <input type="hidden" name="id" value="<?php if(isset($id)){if(!strcmp($id,"add") == 0){echo  $data[0];}}else{echo "add";}?>">
+                <input type="hidden" name="id" value="<?php if(isset($id)){echo  $data[0];}?>">
+                <?php
+                    if(!isset($id)){
+                        echo '<input type="hidden" name="add" value="'."add".'">';
+                    }
+                ?>
                 <label for="nom"> Nom :</label>
-                <input type="text" name="nom" value="<?php if(isset($id)){if( !strcmp($id,"add") == 0){echo  $data[1];}} ?>">
+                <input type="text" name="nom" value="<?php if(isset($id)){echo  $data[1];} ?>">
                 <label for="prenom"> Prénom :</label>
-                <input type="text" name="prenom" value="<?php if(isset($id)){if(!strcmp($id,"add") == 0){echo  $data[2];}} ?>">
+                <input type="text" name="prenom" value="<?php if(isset($id)){echo  $data[2];} ?>">
             </div>
             <div class="form-elements">
                 <label for="date"> Date de naissance :</label>
-                <input type="date" name="date" value="<?php if(isset($id)){if(!strcmp($id,"add") == 0){echo  $data[4];}} ?>">
+                <input type="date" name="date" value="<?php if(isset($id)){echo $data[4];} ?>">
                 <label for="taille"> Taille (cm) :</label>
-                <input type="number" name="taille" min="0" max="250" value="<?php if(isset($id)){if(!strcmp($id,"add") == 0){echo  $data[5];}} ?>">
+                <input type="number" name="taille" min="0" max="250" value="<?php if(isset($id)){ echo  $data[5];} ?>">
             </div>
             <div class="form-elements">
                 <label for="poid"> Poids (Kg):</label>
-                <input type="number" name="poid" min="0" max="250" value="<?php if(isset($id)){if(!strcmp($id,"add") == 0){echo  $data[6];}}  ?>">
+                <input type="number" name="poid" min="0" max="250" value="<?php if(isset($id)){echo  $data[6];}  ?>">
             </div>
             <div class="form-elements">
                 <label for="statut">Statut :</label>   
@@ -239,7 +242,7 @@
             </div>
             <input type="submit" class="btn" value="
             <?php
-                if(isset($_GET['id'])){
+                if(isset($id)){
                     echo "Enregistrer les modifiactions";    
                 }else{
                     echo "Valider la création";

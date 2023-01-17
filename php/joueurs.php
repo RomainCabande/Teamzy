@@ -21,7 +21,7 @@
 <header>
     <a href="accueil.php" id="lg"><img src="../images/logo_teamzy+text.png" alt="logo haut de page"></a>
     <a href="joueurs.php" class="headerLink">Joueurs</a>
-    <a href="#" class="headerLink">Matchs</a>
+    <a href="matchs.php" class="headerLink">Matchs</a>
     <img src="../images/user-icon.png" alt="votre compte" id="iconUser">
 </header>
 <body id="pageJoueur">
@@ -64,7 +64,7 @@
                     $res = $bdd->prepare("SELECT joueur.* FROM joueur");
                     $res->execute();
                     foreach ($res as $row){
-                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='joueurs.php?id={$row['numero_licence']}'><img src='../images/supp.svg' alt=''></a><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a><a href='Profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='joueurs.php?id={$row['numero_licence']}'><img src='../images/supp.svg' alt=''></a><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a><a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
                 }
                 }
 
@@ -73,7 +73,7 @@
                 //     </td><td>{$row['codepostal']}</td><td>{$row['ville']}</td><td>{$row['telephone']}</td>\n";
                 // }
                 foreach ($res as $row){
-                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='joueurs.php?id={$row['numero_licence']}'><img src='../images/supp.svg' alt=''></a><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a><a href='Profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='joueurs.php?id={$row['numero_licence']}'><img src='../images/supp.svg' alt=''></a><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a><a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
                 }
             ?>
         </table>

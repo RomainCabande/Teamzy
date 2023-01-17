@@ -177,10 +177,10 @@ body p{
     margin-top: 110%;
 }
 #accueil #contentContener {
-    display: flex;
+    display: table;
     background-color: white;
     width: 92%;
-    height: 75%;
+    height: fit fit-content;
     border-radius: 40px;
     margin: 0 auto;
     margin-top: 5%;
@@ -194,13 +194,12 @@ body p{
     margin-left: 4%;
 }
 #accueil #contentContener #statVictoire {
-    position: absolute;
     background-color: #3999ae;
     border-radius: 40px;
     width: 85%;
     margin-top: 14%;
-    left: 50%; /* à 50%/50% du parent référent */
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    margin-bottom: 4%;
     padding: 1%;
 }
 #contentContener td{
@@ -227,6 +226,7 @@ body p{
     width: 85%;
     margin-top: 14%;
     margin: 0 auto;
+    margin-bottom: 4%;
     padding: 1%;
 }
 #pagejoueur #contentContener #head{
@@ -354,7 +354,7 @@ body p{
     border-radius: 2em;
     padding: 1%;
 }
-#profil #contentContener {
+#Gprofil #contentContener {
     display: table;
     background-color: white;
     width: 92%;
@@ -363,38 +363,38 @@ body p{
     margin: 0 auto;
     margin-top: 5%;
 }
-#profil #contentContener p {
+#Gprofil #contentContener p {
     margin: 0;
 }
-#profil #contentContener form .form-elements{
+#Gprofil #contentContener form .form-elements{
     margin-top: 3%;
 }
-#profil form{
+#Gprofil form{
     display: table;
     width: 80%;
     margin: 0 auto;
     border: #006e8c solid 2px;
     margin-bottom: 2%;
 }
-#profil form .form-elements input,select,label{
+#Gprofil form .form-elements input,select,label{
     font-size: 1em;
     font-weight: bolder;
     margin: 1%;
 }
-#profil form .form-elements input,select{
+#Gprofil form .form-elements input,select{
     margin-right: 5%;
 }
-#profil form p{
+#Gprofil form p{
     margin: 1%;
     width: fit-content;
 }
-#profil form img{
+#Gprofil form img{
     height: 12em;
     border-radius: 20%;
     background-color: #006e8c;
     padding: 10px;
 }
-#profil form .btn{
+#Gprofil form .btn{
     font-size: 1em;
     background-color: #006e8c;
     border: none;
@@ -405,35 +405,80 @@ body p{
     height: fit-content;
     margin-top: 5%;
 }
-#profil form .btn:hover{
+#Gprofil form .btn:hover{
     background-color: white;
     color: #006e8c;
     border: #006e8c solid 3px;
 
 }
-#profil #pic{
+#Gprofil #pic{
     display: flex;
     padding: 2%;
     border-radius: 2em;
 }
-#profil #info{
+#Gprofil #info{
     padding: 2%;
     border-radius: 2em;
     height: 440px;
 }
-#profil #pic div{
+#Gprofil #pic div{
     display: block;
     height: 250px;
     width: 30%;
 }
-#profil #pic div input{
+#Gprofil #pic div input{
     margin-top: 5%;
 }
-#profil #pic input[type=submit]{
+#Gprofil #pic input[type=submit]{
     height: fit-content;
     
 }
-
+#profil #contentContener {
+    display: table;
+    background-color: white;
+    width: 92%;
+    height: 75%;
+    border-radius: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+#profil #profil-content{
+    display: table;
+    width: 90%;
+    margin: 0 auto;
+    height: fit-content;
+    margin-bottom: 5%;
+    border: #006e8c solid 2px;
+    border-radius: 40px;
+    padding: 15px;
+}
+#profil #profil-content img {
+    height: 12em;
+    border-radius: 20%;
+    background-color: #006e8c39;
+    padding: 5px;
+}
+#profil #profil-content div{
+    display: flex;
+    text-align: center;
+}
+#profil #profil-content p{
+    font-weight: bolder;
+    font-size: 1.5em;
+    width: fit-content;
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-right: 10%;
+}
+#profil #contentContener #table-stats {
+    background-color: #3999ae;
+    border-radius: 40px;
+    width: 90%;
+    margin-top: 14%;
+    margin: 0 auto;
+    margin-bottom: 4%;
+    padding: 1%;
+}
 footer{
     background-color: white;
     margin-top: 5%;
