@@ -202,6 +202,20 @@ body p{
     margin-bottom: 4%;
     padding: 1%;
 }
+#accueil caption{
+    font-size: 1.5em;
+    font-weight: bolder;
+    margin-bottom: 2%;
+}
+#accueil #contentContener #statJouer{
+    background-color: #3999ae;
+    border-radius: 40px;
+    width: 85%;
+    margin-top: 14%;
+    margin: 0 auto;
+    margin-bottom: 4%;
+    padding: 1%;
+}
 #contentContener td{
     border-radius: 40px;
     width: fit-content;

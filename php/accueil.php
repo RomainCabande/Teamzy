@@ -1,3 +1,22 @@
+<?php
+    $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM Matchs WHERE matchs.score_adverse < matchs.score_equipe;");
+    $req->execute();
+    $data = $req->fetch(PDO::FETCH_NUM);
+    $nbVictoire = $data[0];
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM Matchs WHERE matchs.score_adverse > matchs.score_equipe;");
+    $req->execute();
+    $data = $req->fetch(PDO::FETCH_NUM);
+    $nbDefaite = $data[0];
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM Matchs WHERE matchs.score_adverse = matchs.score_equipe;");
+    $req->execute();
+    $data = $req->fetch(PDO::FETCH_NUM);
+    $nbEgalite = $data[0];
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM Matchs");
+    $req->execute();
+    $data = $req->fetch(PDO::FETCH_NUM);
+    $nbMatchs = $data[0];
+?>
 <html lang="en" id="accueil">
 <head>
     <meta charset="UTF-8">
@@ -18,6 +37,7 @@
         <h1>Statistiques</h1>
         <table id="statVictoire">
             <thead>
+                <CAPTION ALIGN="TOP"> Pourcentages resultats </CAPTION>
                 <tr>
                     <th>Victoire</th>
                     <th>Défaite</th>
@@ -26,10 +46,32 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>62%</td>
-                    <td>22%</td>
-                    <td>16%</td>
+                    <td><?php echo ($nbVictoire*100)*1 ?>% (<?php echo $nbVictoire ?>)</td>
+                    <td><?php echo ($nbDefaite*100)*1 ?>% (<?php echo $nbDefaite ?>)</td>
+                    <td><?php echo ($nbEgalite*100)*1 ?>% (<?php echo $nbEgalite ?>)</td>
                 </tr>
+            </tbody>
+        </table>
+
+        <table id="statJouer">
+            <thead>
+                <CAPTION ALIGN="TOP"> Joueurs avec le plus de matchs </CAPTION>
+                <tr>
+                    <th>Nombre Matchs</th>
+                    <th>Nom</th>
+                    <th>Poste</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                    <?PHP
+                    $res = $bdd->prepare("SELECT COUNT(jouer.id_match),joueur.nom,joueur.prenom,joueur.poste_prefere FROM `joueur`,jouer WHERE jouer.numero_licence = joueur.numero_licence ORDER BY COUNT(jouer.id_match) ASC");
+                    $res->execute();
+                    foreach ($res as $row){
+                        echo"<tr><td>{$row[0]}</td><td>{$row['nom']} {$row['prenom']}</td><td>{$row['poste_prefere']}</td>\n";
+                    }
+                    ?>
+                
             </tbody>
         </table>
     </div>
