@@ -10,7 +10,7 @@
 <header>
         <a href="accueil.php" id="lg"><img src="../images/logo_teamzy+text.png" alt="logo haut de page" ></a>
         <a href="joueurs.php" class="headerLink">Joueurs</a>
-        <a href="#" class="headerLink">Matchs</a>
+        <a href="matchs.php" class="headerLink">Matchs</a>
         <img src="../images/user-icon.png" alt="votre compte" id="iconUser">
 </header>
 <body>
