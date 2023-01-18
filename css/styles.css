@@ -74,7 +74,7 @@ body{
 #index #loginContainer div{
     width: 100%;
     text-align: left;
-    
+
 }
 #index #loginContainer div label{
     position: relative;
@@ -281,7 +281,7 @@ body p{
     border: solid 3px #006e8c;
 }
 
-#pagejoueur #recherche input[type=search]{ 
+#pagejoueur #recherche input[type=search]{
     margin-left: 8%;
     width: 25%;
 }
@@ -335,7 +335,7 @@ body p{
     border: solid 3px #006e8c;
 }
 
-#match #recherche input[type=search]{ 
+#match #recherche input[type=search]{
     margin-left: 8%;
     width: 25%;
 }
@@ -445,7 +445,7 @@ body p{
 }
 #Gprofil #pic input[type=submit]{
     height: fit-content;
-    
+
 }
 #profil #contentContener {
     display: table;
@@ -493,6 +493,25 @@ body p{
     margin-bottom: 4%;
     padding: 1%;
 }
+
+#pageModifMatch #contentContener {
+    display: table;
+}
+
+#pageModifMatch #contentContener #head {
+    margin-top: 4%;
+    margin-left: 1%;
+}
+
+#pageModifMatch #contentContener #formModifMatch {
+    margin-left: 10%;
+}
+
+#pageModifMatch #contentContener #formModifMatch div {
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
 footer{
     background-color: white;
     margin-top: 5%;
@@ -521,7 +540,7 @@ footer #reseaux img:hover{
     margin: 5%;
 }
 footer #reseaux p{
-    margin-top: 1%; 
+    margin-top: 1%;
     text-align: center;
 }
 footer #info {
