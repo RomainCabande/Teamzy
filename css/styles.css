@@ -328,6 +328,24 @@ body p{
     padding: 1%;
 }
 
+#pageModifMatch #contentContener {
+    display: table;
+}
+
+#pageModifMatch #contentContener #head {
+    margin-top: 4%;
+    margin-left: 1%;
+}
+
+#pageModifMatch #contentContener #formModifMatch {
+    margin-left: 10%;
+}
+
+#pageModifMatch #contentContener #formModifMatch div {
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
 footer{
     background-color: white;
     margin-top: 5%;

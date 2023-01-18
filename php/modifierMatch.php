@@ -13,29 +13,44 @@
     <a href="#" class="headerLink">Matchs</a>
     <img src="../images/user-icon.png" alt="votre compte" id="iconUser">
 </header>
-<body id="pageJoueur">
+<body id="pageModifMatch">
     <div id="contentContener">
         <div id="head">
             <h1>Modification</h1>
         </div>
-        <form id="recherche">
+        <form id="formModifMatch">
             <form method="post" action="recherche.php" >
-                <input type="search" name="search" placeholder="Rechercher ...">
+                <div class="dateTimeForm">
+                    <input type="date" name="date">
+                    <input type="time" name="time">
+                </div>
+                <div class="nomEquipeAdverseForm">
+                    <input type="text" name="nomEquipeAdverse">
+                </div>
+                <div class="lieuForm">
+                    <input type="text" name="lieu">
+                </div>
+                <div class="scoresForm">
+                    <input type="text" name="scoreAdverse">
+                    <input type="text" name="scoreEquipe">
+                </div>
+                
                 <input type="submit" value="Rechercher">
         </form>	
             <?PHP
+                /*
                 ///Connexion au serveur MySQL
                 $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
                 if(isset($_POST['search'])){
                     
                     $keyword = $_POST['search'];
-                    /* 
-                    $res = $bdd->prepare("SELECT * FROM contact ");
-                    $res->execute();
                     
-                    $data = $res->fetchAll();
-                    print_r($data);
-                    */
+                    //$res = $bdd->prepare("SELECT * FROM contact ");
+                    //$res->execute();
+                    
+                    //$data = $res->fetchAll();
+                    //print_r($data);
+                
                     
                     $res = $bdd->prepare("SELECT j.* FROM joueur as j WHERE concat(nom,prenom,poste_prefere,numero_licence) LIKE '?'");
                     $res->execute(array($keyword));
@@ -54,7 +69,9 @@
                 foreach ($res as $row){
                     echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='profil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a></td>\n";
                 }
+            */
             ?>
+            
     </div>
     <footer>
         <div id="grid-footer">
