@@ -1,3 +1,8 @@
+<?php
+    if(isset($_GET["search"])){
+        $keyword = $_GET['search'];
+    }
+?>
 <html lang="en" id="accueil">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +22,7 @@
     <div id="contentContener">
     <div id="head">
             <h1>Matchs</h1>
-            <a id="btnAdd" href="#">Ajouter un match</a>
+            <a id="btnAdd" href="gestionMatch.php">Ajouter un match</a>
         </div>
         
         <form id="recherche">
@@ -47,8 +52,8 @@
                     print_r($data);
                     */
                     
-                    $res = $bdd->prepare("SELECT m.* FROM matchs as j WHERE concat(date_match,heure,nom_equipe_adverse,lieu) LIKE '?'");
-                    $res->execute(array($keyword));
+                    $res = $bdd->prepare("SELECT m.* FROM matchs as m WHERE UPPER(concat(date_match,heure,nom_equipe_adverse,lieu)) LIKE UPPER('%$keyword%')");
+                    $res->execute();
                 }else{
                     $res = $bdd->prepare("SELECT matchs.* FROM matchs");
                     $res->execute();

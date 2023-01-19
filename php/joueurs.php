@@ -5,6 +5,9 @@
         WHERE numero_licence = ?");
         $req->execute(array($_GET['id']));
     }
+    if(isset($_GET["search"])){
+        $keyword = $_GET['search'];
+    }
 
 
 ?>
@@ -32,7 +35,7 @@
         </div>
         
         <form id="recherche">
-            <form method="post" action="recherche.php" >
+            <form method="GET" action="recherche.php" >
                 <input type="search" name="search" placeholder="Rechercher ...">
                 <input type="submit" value="Rechercher">
         </form>	
@@ -47,9 +50,9 @@
             <?PHP
                 ///Connexion au serveur MySQL
                 $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
-                if(isset($_POST['search'])){
+                if(isset($keyword)){
                     
-                    $keyword = $_POST['search'];
+                    
                     /* 
                     $res = $bdd->prepare("SELECT * FROM contact ");
                     $res->execute();
@@ -58,8 +61,8 @@
                     print_r($data);
                     */
                     
-                    $res = $bdd->prepare("SELECT j.* FROM joueur as j WHERE concat(nom,prenom,poste_prefere,numero_licence) LIKE '?'");
-                    $res->execute(array($keyword));
+                    $res = $bdd->prepare("SELECT joueur.* FROM joueur WHERE UPPER(concat(nom,prenom,poste_prefere,numero_licence)) LIKE UPPER('%$keyword%');");
+                    $res->execute();
                 }else{
                     $res = $bdd->prepare("SELECT joueur.* FROM joueur");
                     $res->execute();
