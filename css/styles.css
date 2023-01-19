@@ -514,6 +514,24 @@ body p{
     margin-top: 4%;
     margin-bottom: 4%;
 }
+#vue-match #contentContener {
+    display: table;
+    background-color: white;
+    width: 92%;
+    height: fit fit-content;
+    border-radius: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+#vue-match #contentContener #table-joueurs{
+    background-color: #3999ae;
+    border-radius: 40px;
+    width: 90%;
+    margin-top: 14%;
+    margin: 0 auto;
+    margin-bottom: 4%;
+    padding: 1%;
+}
 
 footer{
     background-color: white;
