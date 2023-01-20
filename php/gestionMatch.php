@@ -10,32 +10,33 @@
 <header>
     <a href="accueil.php" id="lg"><img src="../images/logo_teamzy+text.png" alt="logo haut de page"></a>
     <a href="joueurs.php" class="headerLink">Joueurs</a>
-    <a href="#" class="headerLink">Matchs</a>
+    <a href="matchs.php" class="headerLink">Matchs</a>
     <img src="../images/user-icon.png" alt="votre compte" id="iconUser">
 </header>
 <body id="pageModifMatch">
     <div id="contentContener">
         <div id="head">
-            <h1>Modification</h1>
+            <h1>Nouveau Match</h1>
         </div>
         <form id="formModifMatch">
             <form method="post" action="recherche.php" >
                 <div class="dateTimeForm">
+                    <label for="date">Date</label>  
                     <input type="date" name="date">
+                    <label for="time">Heure</label>  
                     <input type="time" name="time">
                 </div>
                 <div class="nomEquipeAdverseForm">
-                    <input type="text" name="nomEquipeAdverse">
+                    <label for="nomEquipeAdverse">Nom de l'équipe adverse</label>
+                    <input type="text" name="nomEquipeAdverse" placeholder="PSG">
                 </div>
                 <div class="lieuForm">
-                    <input type="text" name="lieu">
+                    <label for="lieu">Lieu du match</label>
+                    <input type="text" name="lieu" placeholder="Paris">
                 </div>
-                <div class="scoresForm">
-                    <input type="text" name="scoreAdverse">
-                    <input type="text" name="scoreEquipe">
+                <div class="buttonForm">
+                    <input type="submit" value="Enregistrer le match" id="btn">
                 </div>
-                
-                <input type="submit" value="Rechercher">
         </form>	
             <?PHP
                 /*
