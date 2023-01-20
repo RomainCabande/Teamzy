@@ -26,7 +26,7 @@
         </div>
         
         <form id="recherche">
-            <form method="post" action="recherche.php" >
+            <form method="get" action="recherche.php" >
                 <input type="search" name="search" placeholder="Rechercher ...">
                 <input type="submit" value="Rechercher">
         </form>
@@ -42,8 +42,6 @@
                 ///Connexion au serveur MySQL
                 $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
                 if(isset($keyword)){
-                    
-                    $keyword = $_POST['search'];
                     /* 
                     $res = $bdd->prepare("SELECT * FROM contact ");
                     $res->execute();
