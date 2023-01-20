@@ -1,4 +1,10 @@
 <?php
+    if(isset($_GET['id'])){
+        $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
+        $req = $bdd->prepare("DELETE FROM matchs
+        WHERE id_match = ?");
+        $req->execute(array($_GET['id']));
+    }
     if(isset($_GET["search"])){
         $keyword = $_GET['search'];
     }
@@ -56,7 +62,7 @@
                     $res = $bdd->prepare("SELECT matchs.* FROM matchs");
                     $res->execute();
                     foreach ($res as $row){
-                    echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                    echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/voir.svg' alt=''></a></td>\n";
                     }
                 }
 
@@ -65,7 +71,7 @@
                 //     </td><td>{$row['codepostal']}</td><td>{$row['ville']}</td><td>{$row['telephone']}</td>\n";
                 // }
                 foreach ($res as $row){
-                    echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                    echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/voir.svg' alt=''></a></td>\n";
                 }    
             ?>
         </table>
