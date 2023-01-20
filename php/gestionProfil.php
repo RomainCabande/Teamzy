@@ -1,5 +1,5 @@
 <?PHP
-    $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
+    $bdd = new PDO("mysql:host=localhost;dbname= id20110031_teamzydb", 'root', '');
     if(isset($_GET['id'])){
         if(isset($_GET['add'])){
             if(strcmp($_GET['add'],"add") == 0){
@@ -49,7 +49,7 @@
     if(isset($_POST['id'])){
         $id = $_POST['id']; 
     }
-    $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
     if(isset($_FILES['avatar']))
     { 
         $dossier = '../images/pp/';
