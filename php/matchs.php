@@ -40,7 +40,7 @@
             </thead>
             <?PHP
                 ///Connexion au serveur MySQL
-                $bdd = new PDO("mysql:host=localhost;dbname=teamzy", 'root', '');
+                $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
                 if(isset($_POST['search'])){
                     
                     $keyword = $_POST['search'];

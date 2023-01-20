@@ -1,6 +1,6 @@
 <?php
     if(isset($_GET['id'])){
-        $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
+        $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
         $req = $bdd->prepare("DELETE FROM joueur
         WHERE numero_licence = ?");
         $req->execute(array($_GET['id']));
@@ -49,7 +49,7 @@
             </thead>
             <?PHP
                 ///Connexion au serveur MySQL
-                $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
+                $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
                 if(isset($keyword)){
                     
                     

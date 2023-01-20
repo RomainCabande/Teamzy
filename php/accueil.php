@@ -1,5 +1,5 @@
 <?php
-    $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
     $req = $bdd->prepare("SELECT count(matchs.id_match) FROM Matchs WHERE matchs.score_adverse < matchs.score_equipe;");
     $req->execute();
     $data = $req->fetch(PDO::FETCH_NUM);
@@ -46,9 +46,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><?php echo ($nbVictoire*100)*1 ?>% (<?php echo $nbVictoire ?>)</td>
-                    <td><?php echo ($nbDefaite*100)*1 ?>% (<?php echo $nbDefaite ?>)</td>
-                    <td><?php echo ($nbEgalite*100)*1 ?>% (<?php echo $nbEgalite ?>)</td>
+                    <td><?php echo ($nbVictoire*100)/$nbMatchs ?>% (<?php echo $nbVictoire ?>)</td>
+                    <td><?php echo ($nbDefaite*100)/$nbMatchs ?>% (<?php echo $nbDefaite ?>)</td>
+                    <td><?php echo ($nbEgalite*100)/$nbMatchs ?>% (<?php echo $nbEgalite ?>)</td>
                 </tr>
             </tbody>
         </table>

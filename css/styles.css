@@ -532,6 +532,11 @@ body p{
     margin-bottom: 4%;
     padding: 1%;
 }
+#vue-match #contentContener p{
+    margin: 1%;
+    font-weight: bolder;
+    font-size: 1.5em;
+}
 
 footer{
     background-color: white;
