@@ -1,5 +1,5 @@
 <?PHP
-    $bdd = new PDO("mysql:host=localhost;dbname= id20110031_teamzydb", 'root', '');
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
     if(isset($_GET['id'])){
         if(isset($_GET['add'])){
             if(strcmp($_GET['add'],"add") == 0){
