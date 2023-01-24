@@ -2,7 +2,10 @@
     $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
     if(isset($_GET['id'])){
         $id = $_GET['id'];
-    }
+        $rs = $bdd->prepare("SELECT matchs.* from matchs where id_match = $id");
+        $rs->execute();
+        $data = $rs->fetch(PDO::FETCH_NUM);      
+    } 
     
     
     
@@ -27,16 +30,12 @@
         <h1>Récapitulatif</h1>
         <img src="../images/pp/" alt="">
         <div id="vue-match-content">
-        <p></p>
             <?php
-                $res = $bdd->prepare("SELECT matchs.* FROM matchs WHERE matchs.id_match = ?;");
-                $res->execute(array($id));
-                $data = $res->fetch(PDO::FETCH_NUM);
-                echo "<p> Adversaire : ".$data['matchs.nom_equipe_adverse']."</p>
-                    <p> Date : ".$data['matchs.date_match']."</p>
-                    <p> Heure : ".$data['matchs.heure']."</p>";
+               
+                echo "<p> Adversaire : ".$data[3]."</p>
+                    <p> Date : ".$data[1]."</p>
+                    <p> Heure : ".$data[2]."</p>";
             ?>
-
         </div>
         <table id="table-joueurs">
             <thead>
@@ -47,8 +46,8 @@
             </thead>
             <?PHP
                 if(isset($_GET['id'])){
-                    $res = $bdd->prepare("SELECT matchs.*,jouer.* FROM jouer,matchs WHERE matchs.id_match = jouer.id_match AND jouer.numero_licence = ?;");
-                    $res->execute(array($id));
+                    $res = $bdd->prepare("SELECT matchs.*,jouer.*,joueur.* FROM jouer,matchs,joueur WHERE matchs.id_match = jouer.id_match AND jouer.numero_licence = ? AND jouer.numero_licence =joueur.numero_licence ;");
+                    $res->execute(array($_GET['id']));
                     foreach ($res as $row){
                         echo"<tr><td>{$row['nom']}"." "."{$row['prenom']}</td><td>{$row['poste_prefere']}</td></tr>\n";
                     }
