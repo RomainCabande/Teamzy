@@ -1,9 +1,9 @@
 <?php
     $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
-    if($_GET['date'] != ""){
-        if($_GET['time'] != "") {
-            if($_GET['nomEquipeAdverse'] != "") {
-                if($_GET['lieu'] != "") {
+    if(isset($_GET['date']) and $_GET['date'] != ""){
+        if(isset($_GET['date']) and $_GET['time'] != "") {
+            if(isset($_GET['date']) and $_GET['nomEquipeAdverse'] != "") {
+                if(isset($_GET['date']) and $_GET['lieu'] != "") {
                     $add = $bdd->prepare("INSERT INTO matchs(date_match, heure, nom_equipe_adverse, lieu, score_adverse, score_equipe)
                     VALUES(:dateMatch, :heure, :nomEquipeAdv, :lieu, :scoreAdv, :scoreEqu)");
                     //Exécution de la requête
