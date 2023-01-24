@@ -513,13 +513,50 @@ body p{
 }
 
 #pageModifMatch #contentContener #formModifMatch {
-    margin-left: 10%;
+    margin-left: 7%;
+    margin-bottom: 5%;
 }
 
 #pageModifMatch #contentContener #formModifMatch div {
-    margin-top: 4%;
-    margin-bottom: 4%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
+
+#pageModifMatch #contentContener form{
+    padding: 3%;
+    display: table;
+    width: 80%;
+    margin: 0 auto;
+    border: #006e8c solid 2px;
+    margin-bottom: 2%;
+    border-radius: 40px;
+    font-size: 1.3em;
+}
+
+#pageModifMatch #contentContener #formModifMatch .buttonForm {
+    margin-left: 0.5%;
+    margin-bottom: 1%;
+}
+
+#pageModifMatch form .buttonForm #btn{
+    font-size: 1em;
+    background-color: #006e8c;
+    border: none;
+    padding: 1%;
+    border-radius: 20px;
+    color: white;
+    font-weight: bolder;
+    height: fit-content;
+    margin-top: 2%;
+}
+
+#pageModifMatch form .buttonForm #btn:hover {
+    background-color: white;
+    color: #006e8c;
+    border: #006e8c solid 3px;
+
+}
+
 #vue-match #contentContener {
     display: table;
     background-color: white;
