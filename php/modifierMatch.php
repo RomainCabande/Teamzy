@@ -24,13 +24,11 @@
         if(isset($_GET['time'])) { 
             if(isset($_GET['nomEquipeAdverse'])) {
                 if(isset($_GET['lieu'])) {
-                    $update = $bdd->prepare("UPDATE matchs SET date_match=:date_match, heure=:heure, nom_equipe_adverse=:nomEquipeAdverse, lieu=:lieu, score_equipe=:scoreEquipe, score_adverse=:scoreAdverse WHERE id_match = :id");
+                    $update = $bdd->prepare("UPDATE matchs SET date_match=:date_match, heure=:heure, nom_equipe_adverse=:nomEquipeAdverse, lieu=:lieu WHERE id_match = :id");
                     $update->execute(array('date_match' => $_GET['date'],
                                             'heure'=> $_GET['time'],
                                             'nomEquipeAdverse'=> $_GET['nomEquipeAdverse'],
                                             'lieu'=> $_GET['lieu'],
-                                            'scoreEquipe' => $_GET['scoreEquipe'],
-                                            'scoreAdverse' => $_GET['scoreAdv'],
                                             'id' => $_GET['id']));
                 }
             }
