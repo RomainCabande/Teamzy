@@ -92,7 +92,7 @@
             <h1>Composer mon équipe</h1>
         </div>
         <div>
-            <table id="tablejoueur">
+            <table id="tableCompo">
                 <thead>
                     <tr>
                         <th>Prénom</th>
@@ -106,7 +106,37 @@
                     $res = $bdd->prepare("SELECT joueur.* FROM joueur");
                     $res->execute();
                     foreach ($res as $row){
+                        echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                    }
+                ?>
+            </table>
+            <div id="head">
+                <h1>Tout les joueurs</h1>
+            </div>
+            <form id="recherche">
+            <form method="GET" action="recherche.php" >
+                <input type="search" name="search" placeholder="Rechercher ...">
+                <input type="submit" value="Rechercher">
+            </form>
+            <table id="tablejoueurs">
+                <thead>
+                    <tr>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Poste</th>
+                    </tr>
+                </thead>
+                <?PHP
+                    ///Connexion au serveur MySQL
+                    if(isset($keyword)){
+                        $res = $bdd->prepare("SELECT joueur.* FROM joueur WHERE UPPER(concat(nom,prenom,poste_prefere,numero_licence)) LIKE UPPER('%$keyword%');");
+                        $res->execute();
+                    }else{
+                        $res = $bdd->prepare("SELECT joueur.* FROM joueur");
+                        $res->execute();
+                        foreach ($res as $row){
                         echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='joueurs.php?id={$row['numero_licence']}'><img src='../images/supp.svg' alt=''></a><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a><a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                    }
                     }
                 ?>
             </table>
