@@ -98,10 +98,6 @@
             }
             
         ?>
-        
-
-        
-        <!-- The data encoding type, enctype, MUST be specified as below -->
 
         <form  method="GET" action="gestionProfil.php" id="info">
             <div class="form-elements">

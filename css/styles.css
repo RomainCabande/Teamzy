@@ -522,7 +522,7 @@ body p{
     margin-bottom: 2%;
 }
 
-#pageModifMatch #contentContener form{
+#pageModifMatch #contentContener form {
     padding: 3%;
     display: table;
     width: 80%;
@@ -547,14 +547,13 @@ body p{
     color: white;
     font-weight: bolder;
     height: fit-content;
-    margin-top: 2%;
+    margin-top: 0;
 }
 
 #pageModifMatch form .buttonForm #btn:hover {
     background-color: white;
     color: #006e8c;
     border: #006e8c solid 3px;
-
 }
 
 #vue-match #contentContener {

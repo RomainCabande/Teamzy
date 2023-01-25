@@ -1,6 +1,25 @@
 <?php
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
+    if(isset($_GET['date']) and $_GET['date'] != ""){
+        if(isset($_GET['date']) and $_GET['time'] != "") {
+            if(isset($_GET['date']) and $_GET['nomEquipeAdverse'] != "") {
+                if(isset($_GET['date']) and $_GET['lieu'] != "") {
+                    $add = $bdd->prepare("INSERT INTO matchs(date_match, heure, nom_equipe_adverse, lieu, score_adverse, score_equipe)
+                    VALUES(:dateMatch, :heure, :nomEquipeAdv, :lieu, :scoreAdv, :scoreEqu)");
+                    //Exécution de la requête
+                    $add->execute(array('dateMatch' => $_GET['date'],
+                                        'heure'=> $_GET['time'],
+                                        'nomEquipeAdv'=> $_GET['nomEquipeAdverse'],
+                                        'lieu'=> $_GET['lieu'],
+                                        'scoreAdv' => 0,
+                                        'scoreEqu' => 0,
+                                        ));
+                }
+            }
+        }
+    }
+
     if(isset($_GET['id'])){
-        $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
         $req = $bdd->prepare("DELETE FROM matchs
         WHERE id_match = ?");
         $req->execute(array($_GET['id']));

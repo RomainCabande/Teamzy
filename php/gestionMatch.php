@@ -18,8 +18,7 @@
         <div id="head">
             <h1>Nouveau Match</h1>
         </div>
-        <form id="formModifMatch">
-            <form method="post" action="recherche.php" >
+            <form id="formModifMatch" method="get" action="matchs.php">
                 <div class="dateTimeForm">
                     <label for="date">Date</label>  
                     <input type="date" name="date">
@@ -37,42 +36,7 @@
                 <div class="buttonForm">
                     <input type="submit" value="Enregistrer le match" id="btn">
                 </div>
-        </form>	
-            <?PHP
-                /*
-                ///Connexion au serveur MySQL
-                $bdd = new PDO("mysql:host=localhost;dbname=testprojet", 'root', '');
-                if(isset($_POST['search'])){
-                    
-                    $keyword = $_POST['search'];
-                    
-                    //$res = $bdd->prepare("SELECT * FROM contact ");
-                    //$res->execute();
-                    
-                    //$data = $res->fetchAll();
-                    //print_r($data);
-                
-                    
-                    $res = $bdd->prepare("SELECT j.* FROM joueur as j WHERE concat(nom,prenom,poste_prefere,numero_licence) LIKE '?'");
-                    $res->execute(array($keyword));
-                }else{
-                    $res = $bdd->prepare("SELECT joueur.* FROM joueur");
-                    $res->execute();
-                    foreach ($res as $row){
-                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='profil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a></td>\n";
-                }
-                }
-
-                // while ($row = $res->fetch()) {
-                //     echo"<tr><td>{$row['nom']}</td><td>{$row['prenom']}</td><td>{$row['adresse']}
-                //     </td><td>{$row['codepostal']}</td><td>{$row['ville']}</td><td>{$row['telephone']}</td>\n";
-                // }
-                foreach ($res as $row){
-                    echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='profil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a></td>\n";
-                }
-            */
-            ?>
-            
+            </form>	  
     </div>
     <footer>
         <div id="grid-footer">
