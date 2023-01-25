@@ -131,7 +131,7 @@
                             echo "selected";
                         }
                     ?>
-                    >--Please choose an option--</option>
+                    >--Choisissez un statut--</option>
                     <option value="Titulaire"
                     <?php
                         if(isset($id)){
@@ -178,62 +178,62 @@
                             }
                         }
                     ?>
-                    >--Please choose an option--</option>
-                    <option value="arrière latéral"
+                    >--Choisissez un poste--</option>
+                    <option value="Arrière latéral"
                     <?php
                         if(isset($id)){
                             if(!strcmp($id,"add") == 0){
-                                if(strcmp($poste,"arrière latéral") == 0 ){
+                                if(strcmp($poste,"Arrière latéral") == 0 ){
                                     echo "selected";
                                 }
                             }
                         }    
                     ?>
-                    >arrière latéral</option>
-                    <option value="milieu défensif"  
+                    >Arrière latéral</option>
+                    <option value="Milieu défensif"  
                     <?php
                         if(isset($id)){
                             if(!strcmp($id,"add") == 0){
-                                if(strcmp($poste,"milieu défensif") == 0 ){
+                                if(strcmp($poste,"Milieu défensif") == 0 ){
                                     echo "selected";
                                 }
                             }
                         }    
                     ?>
-                        >milieu défensif</option>
-                    <option value="milieu offensif"
+                    >Milieu défensif</option>
+                    <option value="Milieu offensif"
                     <?php
                         if(isset($id)){
                             if(!strcmp($id,"add") == 0){
-                                if(strcmp($poste,"milieu offensif") == 0 ){
+                                if(strcmp($poste,"Milieu offensif") == 0 ){
                                     echo "selected";
                                 }   
                             }
                         }    
                     ?>
-                    >milieu offensif</option>
-                    <option value="attaquant"
+                    >Milieu offensif</option>
+                    <option value="Attaquant"
                     <?php
                         if(isset($id)){
                             if(!strcmp($id,"add") == 0){
-                                if(strcmp($poste,"attaquant") == 0 ){
+                                if(strcmp($poste,"Attaquant") == 0 ){
                                     echo "selected";
                                 }    
                             }
                         }   
                     ?>
-                    >attaquant</option>
-                    <option value="gardien de but"
+                    >Attaquant</option>
+                    <option value="Gardien de but"
                     <?php
                         if(isset($id)){
                             if(!strcmp($id,"add") == 0){
-                                if(strcmp($poste,"gardien de but") == 0 ){
+                                if(strcmp($poste,"Gardien de but") == 0 ){
                                     echo "selected";
                                 }     
                         }
                         }    
                     ?>
-                    >gardien de but</option>
+                    >Gardien de but</option>
                 </select> 
             </div>
             <input type="submit" class="btn" value="

@@ -1,29 +1,28 @@
 <?php
     $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
     if(isset($_GET['date']) and $_GET['date'] != "" and isset($_GET['time']) and $_GET['time'] != "" and isset($_GET['nomEquipeAdverse']) and $_GET['nomEquipeAdverse'] != "" and isset($_GET['lieu']) and $_GET['lieu'] != ""){
-                        $add = $bdd->prepare("INSERT INTO matchs(date_match, heure, nom_equipe_adverse, lieu, score_adverse, score_equipe)
-                        VALUES(:dateMatch, :heure, :nomEquipeAdv, :lieu, :scoreAdv, :scoreEqu)");
-                        //Exécution de la requête
-                        $add->execute(array('dateMatch' => $_GET['date'],
-                                            'heure'=> $_GET['time'],
-                                            'nomEquipeAdv'=> $_GET['nomEquipeAdverse'],
-                                            'lieu'=> $_GET['lieu'],
-                                            'scoreAdv' => 0,
-                                            'scoreEqu' => 0,
-                                            ));
+        $add = $bdd->prepare("INSERT INTO matchs(date_match, heure, nom_equipe_adverse, lieu, score_adverse, score_equipe)
+        VALUES(:dateMatch, :heure, :nomEquipeAdv, :lieu, :scoreAdv, :scoreEqu)");
+        //Exécution de la requête
+        $add->execute(array('dateMatch' => $_GET['date'],
+                            'heure'=> $_GET['time'],
+                            'nomEquipeAdv'=> $_GET['nomEquipeAdverse'],
+                            'lieu'=> $_GET['lieu'],
+                            'scoreAdv' => 0,
+                            'scoreEqu' => 0,
+        ));
     }
     
     if(isset($_GET['id'])){
-        $req = $bdd->prepare("DELETE FROM matchs
-        WHERE id_match = ?");
+        $req = $bdd->prepare("DELETE FROM matchs WHERE id_match = ?");
         $req->execute(array($_GET['id']));
     }
     
     if(isset($_GET["search"])){
         $keyword = $_GET['search'];
     }
-    
 ?>
+
 <html lang="en" id="accueil">
 <head>
     <meta charset="UTF-8">
@@ -42,19 +41,17 @@
 <body id="match">
     <div id="contentContener">
     <div id="head">
-            <h1>Matchs</h1>
-            <a id="btnAdd" href="gestionMatch.php">Ajouter un match</a>
+        <h1>Matchs</h1>
+        <a id="btnAdd" href="gestionMatch.php">Ajouter un match</a>
+    </div>
+    <div id="tab-top-bar">
+        <form id="recherche" method="get" action="matchs.php" >
+            <input type="search" name="search" placeholder="Rechercher ...">
+            <input type="submit" value="Rechercher">
+        </form>
+        <a href="matchs.php?filtre=futur">Matchs à venir</a>
+        <a href="matchs.php?filtre=passe">Matchs passés</a>
         </div>
-        <div id="tab-top-bar">
-            <form id="recherche">
-            <form method="get" action="recherche.php" >
-                <input type="search" name="search" placeholder="Rechercher ...">
-                <input type="submit" value="Rechercher">
-            </form>
-            <a href="matchs.php?filtre=futur">Matchs à venir</a>
-            <a href="matchs.php?filtre=passe">Matchs passés</a>
-        </div>
-        
         <table id="tableMatchs">
             <thead>
                 <tr>
@@ -64,19 +61,18 @@
                 </tr>
             </thead>
             <?PHP
-                ///Connexion au serveur MySQL
+                //Connexion au serveur MySQL
                 $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
                 if(isset($_GET['filtre'])){
                     if(strcmp($_GET['filtre'],"futur") == 0){
                         if(isset($keyword)){
-
                             $res = $bdd->prepare("SELECT m.* FROM matchs as m WHERE UPPER(concat(date_match,heure,nom_equipe_adverse,lieu)) LIKE UPPER('%$keyword%') AND matchs.heure < NOW()");
                             $res->execute();
                         }else{
-                            $res = $bdd->prepare("SELECT matchs.* FROM matchs Where matchs.heure < NOW()");
+                            $res = $bdd->prepare("SELECT matchs.* FROM matchs Where concat(matchs.date_match, ' ', matchs.heure) > NOW()");
                             $res->execute();
                             foreach ($res as $row){
-                            echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                                echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/voir.svg' alt=''></a></td>\n";
                             }
                         }
                         foreach ($res as $row){
@@ -88,7 +84,7 @@
                             $res = $bdd->prepare("SELECT m.* FROM matchs as m WHERE UPPER(concat(date_match,heure,nom_equipe_adverse,lieu)) LIKE UPPER('%$keyword%') AND matchs.heure > NOW()");
                             $res->execute();
                         }else{
-                            $res = $bdd->prepare("SELECT matchs.* FROM matchs Where matchs.heure > NOW()");
+                            $res = $bdd->prepare("SELECT matchs.* FROM matchs Where concat(matchs.date_match, ' ', matchs.heure) < NOW()");
                             $res->execute();
                             foreach ($res as $row){
                             echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/voir.svg' alt=''></a></td>\n";

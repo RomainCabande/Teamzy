@@ -305,7 +305,6 @@ body p{
     color: white;
 }
 
-
 #match #contentContener #tableMatchs {
     background-color: #3999ae;
     border-radius: 40px;
@@ -329,6 +328,7 @@ body p{
     font-size: 1.5em;
     border-radius: 2em;
     padding: 1%;
+    height: 100%;
 }
 
 #match #recherche input[type=submit]{
@@ -382,6 +382,9 @@ body p{
     width: 90%;
     margin: 0 auto;
     margin-bottom: 2%;
+}
+#match #contentContener #recherche {
+    margin-bottom: 0;
 }
 #match #contentContener #tab-top-bar a{
     color: white;
@@ -593,7 +596,7 @@ body p{
     border: none;
 }
 #pageModifMatch #recherche input{
-    font-size: 1.5em;
+    font-size: 0.8em;
     border-radius: 2em;
     padding: 1%;
 }
@@ -613,7 +616,7 @@ body p{
 
 #pageModifMatch #recherche input[type=search]{
     margin-left: 8%;
-    width: 50%;
+    width: 35%;
 }
 #pageModifMatch #recherche input[type=search]:focus{
     border: solid 3px #006e8c;
@@ -634,6 +637,12 @@ body p{
 
 #pageModifMatch #contentContener #tablejoueur td{
    display: flex;
+}
+
+#pageModifMatch #contentContener #recherche {
+    padding: 0%;
+    border: none;
+    width: 100%;    
 }
 
 

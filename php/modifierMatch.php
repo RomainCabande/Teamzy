@@ -1,25 +1,8 @@
 <?php
+    //DB connexion
     $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
 
-    /*
-    $idM = $_GET['idM'];
-    $req = $bdd->prepare("SELECT * FROM matchs WHERE id_match = ?;");
-    $req->execute(array($idM));
-    $data = $req->fetch(PDO::FETCH_NUM);
-    if(isset($_GET['idJ'])){
-        if(isset($_GET['note'])){
-            if(isset($_GET['com'])){
-                $ajout = $bdd->prepare('UPDATE jouer SET jouer  WHERE numero_licence = :idJ AND id_match = :idM');
-                $ajout->execute(array('poste' => $_GET['poste']
-                                ,'idJ' => $_GET['idJ']
-                                ,'idM' => $_GET['idM']));
-            }
-            
-        }
-    }
-    */
-
-    //update match for id clicked if all values are set
+    //update match for id
     if(isset($_GET['date'])) {
         if(isset($_GET['time'])) { 
             if(isset($_GET['nomEquipeAdverse'])) {
@@ -35,11 +18,21 @@
         }    
     }
 
-    //get matchs data for id clicked
-    $id = $_GET['id'];
-    $req = $bdd->prepare("SELECT * from matchs where id_match = ?");
-    $req->execute(array($id));
-    $data = $req->fetch(PDO::FETCH_NUM);
+    //select matchs data for id
+    if(isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $req = $bdd->prepare("SELECT * from matchs where id_match = ?");
+        $req->execute(array($id));
+        $data = $req->fetch(PDO::FETCH_NUM); 
+    }
+
+    //insert players into match team
+    if(isset($_GET['id']) and isset($_GET['player_id'])) {
+        $req = $bdd->prepare("INSERT INTO `jouer` (`note_joueur`, `titulaire`, `commentaire`, `numero_licence`, `id_match`) VALUES (NULL, NULL, NULL, :numero_licence, :id_match)");
+        $req->execute(array('id_match' => $_GET['id'],
+                            'numero_licence' => $_GET['player_id']));
+    }
+ 
 ?>
 <html lang="en" id="accueil">
 <head>
@@ -86,9 +79,6 @@
         <div id="head">
             <h1>Mon équipe</h1>
         </div> 
-        <div id="head">
-            <h1>Composer mon équipe</h1>
-        </div>
         <div>
             <table id="tableCompo">
                 <thead>
@@ -99,23 +89,26 @@
                     </tr>
                 </thead>
                 <?PHP
-                    ///Connexion au serveur MySQL
-                    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
-                    $res = $bdd->prepare("SELECT joueur.* FROM joueur");
+                    //players display
+                    $res = $bdd->prepare("SELECT joueur.* FROM joueur, jouer, matchs WHERE joueur.numero_licence = jouer.numero_licence and matchs.id_match = jouer.id_match");
                     $res->execute();
                     foreach ($res as $row){
-                        echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                        echo"<tr>
+                                <td>{$row['prenom']}</td>
+                                <td>{$row['nom']}</td>
+                                <td>{$row['poste_prefere']}</td>
+                                <td><a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
                     }
                 ?>
             </table>
-            <div id="head">
-                <h1>Tout les joueurs</h1>
-            </div>
-            <form id="recherche">
-            <form method="GET" action="recherche.php" >
-                <input type="search" name="search" placeholder="Rechercher ...">
-                <input type="submit" value="Rechercher">
-            </form>
+        <div id="head">
+            <h1>Tous les joueurs</h1>
+        </div>
+        <form id="recherche" method="GET" action="modifierMatch.php" >
+            <input type="search" name="search" placeholder="Rechercher ...">
+            <input type="hidden" name="id" value="<?php echo $_GET['id']?>">
+            <input type="submit" value="Rechercher">
+        </form>
             <table id="tablejoueurs">
                 <thead>
                     <tr>
@@ -125,16 +118,37 @@
                     </tr>
                 </thead>
                 <?PHP
-                    ///Connexion au serveur MySQL
-                    if(isset($keyword)){
+                    //players display with keyword filter
+                    if(isset($_GET['search'])){
+                        $keyword = $_GET['search'];
                         $res = $bdd->prepare("SELECT joueur.* FROM joueur WHERE UPPER(concat(nom,prenom,poste_prefere,numero_licence)) LIKE UPPER('%$keyword%');");
                         $res->execute();
+                        foreach ($res as $row){
+                            echo "  <tr> 
+                                        <td>{$row['prenom']}</td>
+                                        <td>{$row['nom']}</td>
+                                        <td>{$row['poste_prefere']}</td>
+                                        <td>
+                                            <a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a>
+                                            <a href='modifierMatch.php?player_id={$row['numero_licence']}&id={$_GET['id']}'><img src='../images/add.png' alt=''></a>
+                                        </td>
+                                    <tr>\n";
+                        }
+                    //players display no keyword
                     }else{
                         $res = $bdd->prepare("SELECT joueur.* FROM joueur");
                         $res->execute();
                         foreach ($res as $row){
-                        echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='joueurs.php?id={$row['numero_licence']}'><img src='../images/supp.svg' alt=''></a><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a><a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
-                    }
+                            echo "  <tr> 
+                                        <td>{$row['prenom']}</td>
+                                        <td>{$row['nom']}</td>
+                                        <td>{$row['poste_prefere']}</td>
+                                        <td>
+                                            <a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a>
+                                            <a href='modifierMatch.php?player_id={$row['numero_licence']}&id={$_GET['id']}'><img src='../images/add.png' alt=''></a>
+                                        </td>
+                                    <tr>\n";
+                        }
                     }
                 ?>
             </table>
