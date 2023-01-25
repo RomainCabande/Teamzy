@@ -26,7 +26,7 @@
         <h1>Feuille de match de <?PHP echo $data[1]." ".$data[2] ?></h1>
         <form action="modifierMatch.php" method="GET">
             <div class="part">
-                <input type="hidden" name="id" value="<?PHP echo $data[1] ?>">
+                <input type="hidden" name="idJ" value="<?PHP echo $data[1] ?>">
                 <div>
                    <label for="note">Note du match</label> 
                 </div>
