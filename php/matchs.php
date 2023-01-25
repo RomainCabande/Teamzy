@@ -70,7 +70,7 @@
                     if(strcmp($_GET['filtre'],"futur") == 0){
                         if(isset($keyword)){
 
-                            $res = $bdd->prepare("SELECT m.* FROM matchs as m WHERE UPPER(concat(date_match,heure,nom_equipe_adverse,lieu)) LIKE UPPER('%$keyword%')");
+                            $res = $bdd->prepare("SELECT m.* FROM matchs as m WHERE UPPER(concat(date_match,heure,nom_equipe_adverse,lieu)) LIKE UPPER('%$keyword%') AND matchs.heure < NOW()");
                             $res->execute();
                         }else{
                             $res = $bdd->prepare("SELECT matchs.* FROM matchs Where matchs.heure < NOW()");
@@ -85,7 +85,7 @@
                     }elseif(strcmp($_GET['filtre'],"passe") == 0){
                         if(isset($keyword)){
 
-                            $res = $bdd->prepare("SELECT m.* FROM matchs as m WHERE UPPER(concat(date_match,heure,nom_equipe_adverse,lieu)) LIKE UPPER('%$keyword%')");
+                            $res = $bdd->prepare("SELECT m.* FROM matchs as m WHERE UPPER(concat(date_match,heure,nom_equipe_adverse,lieu)) LIKE UPPER('%$keyword%') AND matchs.heure > NOW()");
                             $res->execute();
                         }else{
                             $res = $bdd->prepare("SELECT matchs.* FROM matchs Where matchs.heure > NOW()");
