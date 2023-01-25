@@ -1,6 +1,8 @@
 <?php
-    $idM = $_GET['idM'];
     $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
+
+    /*
+    $idM = $_GET['idM'];
     $req = $bdd->prepare("SELECT * FROM matchs WHERE id_match = ?;");
     $req->execute(array($idM));
     $data = $req->fetch(PDO::FETCH_NUM);
@@ -15,8 +17,33 @@
             
         }
     }
+    */
+
+    //update match for id clicked if all values are set
+    if(isset($_GET['date'])) {
+        if(isset($_GET['time'])) { 
+            if(isset($_GET['nomEquipeAdverse'])) {
+                if(isset($_GET['lieu'])) {
+                    $update = $bdd->prepare("UPDATE matchs SET date_match=:date_match, heure=:heure, nom_equipe_adverse=:nomEquipeAdverse, lieu=:lieu, score_equipe=:scoreEquipe, score_adverse=:scoreAdverse WHERE id_match = :id");
+                    $update->execute(array('date_match' => $_GET['date'],
+                                            'heure'=> $_GET['time'],
+                                            'nomEquipeAdverse'=> $_GET['nomEquipeAdverse'],
+                                            'lieu'=> $_GET['lieu'],
+                                            'scoreEquipe' => $_GET['scoreEquipe'],
+                                            'scoreAdverse' => $_GET['scoreAdv'],
+                                            'id' => $_GET['id']));
+                }
+            }
+        }    
+    }
+
+    //get matchs data for id clicked
+    $id = $_GET['id'];
+    $req = $bdd->prepare("SELECT * from matchs where id_match = ?");
+    $req->execute(array($id));
+    $data = $req->fetch(PDO::FETCH_NUM);
 ?>
-<html lang="en" id="modifMatch">
+<html lang="en" id="accueil">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,9 +58,59 @@
         <a href="matchs.php" class="headerLink">Matchs</a>
         <img src="../images/user-icon.png" alt="votre compte" id="iconUser">
 </header>
-<body>
+<body id="pageModifMatch">
     <div id="contentContener">
-        <h1>modifications match</h1>
+        <div id="head">
+            <h1>Modifier le match</h1>
+        </div>
+        <form id="formModifMatch" method="get" action="modifierMatch.php">
+                <div>
+                    <input type="hidden" name="id" value="<?php if(isset($id)){echo $data[0];} ?>">
+                </div>
+                <div class="dateTimeForm">
+                    <label for="date">Date</label>  
+                    <input type="date" name="date" value="<?php if(isset($id)){echo $data[1];} ?>">
+                    <label for="time">Heure</label>  
+                    <input type="time" name="time" value="<?php if(isset($id)){echo $data[2];} ?>">
+                </div>
+                <div class="nomEquipeAdverseForm">
+                    <label for="nomEquipeAdverse">Nom de l'équipe adverse</label>
+                    <input type="text" name="nomEquipeAdverse" placeholder="PSG" value="<?php if(isset($id)){echo $data[3];} ?>">
+                </div>
+                <div class="lieuForm">
+                    <label for="lieu">Lieu du match</label>
+                    <input type="text" name="lieu" placeholder="Paris" value="<?php if(isset($id)){echo  $data[4];} ?>">
+                </div>
+                <div class="buttonForm">
+                    <input type="submit" value="Enregistrer le match" id="btn">
+                </div>
+        </form>	 
+        <div id="head">
+            <h1>Mon équipe</h1>
+        </div> 
+        <div id="head">
+            <h1>Composer mon équipe</h1>
+        </div>
+        <div>
+            <table id="tablejoueur">
+                <thead>
+                    <tr>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Poste</th>
+                    </tr>
+                </thead>
+                <?PHP
+                    ///Connexion au serveur MySQL
+                    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
+                    $res = $bdd->prepare("SELECT joueur.* FROM joueur");
+                    $res->execute();
+                    foreach ($res as $row){
+                        echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='joueurs.php?id={$row['numero_licence']}'><img src='../images/supp.svg' alt=''></a><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a><a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                    }
+                ?>
+            </table>
+        </div>
     </div>
     <footer>
         <div id="grid-footer">
@@ -56,5 +133,4 @@
         </div>
     </footer>
 </body>
-
 </html>

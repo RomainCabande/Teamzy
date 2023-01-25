@@ -555,6 +555,10 @@ body p{
     margin-bottom: 1%;
 }
 
+#pageModifMatch #contentContener #formModifMatch .scores input {
+    width: 4%;
+}
+
 #pageModifMatch form .buttonForm #btn{
     font-size: 1em;
     background-color: #006e8c;
@@ -573,11 +577,42 @@ body p{
     border: #006e8c solid 3px;
 }
 
+#pageModifMatch #contentContener{
+    display: table;
+}
+#pageModifMatch #contentContener #tablejoueur {
+    background-color: #3999ae;
+    border-radius: 40px;
+    width: 85%;
+    margin-top: 14%;
+    margin: 0 auto;
+    margin-bottom: 4%;
+    padding: 1%;
+}
+
+#pageModifMatch #contentContener td{
+    border-radius: 40px;
+    width: fit-content;
+    background-color: white;
+    text-align: center;
+    font-size: 2em;
+}
+
+#pageModifMatch #contentContener .ligneJoueur:hover td{
+    background-color: lightslategrey;
+    color: white;
+}
+
+#pageModifMatch #contentContener #tablejoueur td{
+   display: flex;
+}
+
+
 #vue-match #contentContener {
     display: table;
     background-color: white;
     width: 92%;
-    height: fit fit-content;
+    height: fit-content;
     border-radius: 40px;
     margin: 0 auto;
     margin-top: 5%;
