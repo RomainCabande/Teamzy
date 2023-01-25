@@ -590,6 +590,64 @@ body p{
     border-radius: 40px;
     padding: 15px;
 }
+#feuilleMatch #contentContener {
+    display: table;
+    background-color: white;
+    width: 92%;
+    height: fit fit-content;
+    border-radius: 40px;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+#feuilleMatch #contentContener h1{
+    font-size: 3em;
+}
+#feuilleMatch #contentContener textarea[name=com]{
+    font-size: 1em;
+    font-weight: bolder;
+    resize : both;
+    min-width : 200px;
+    min-height : 200px;
+    max-width : 400px;
+    max-height : 300px;
+}
+#feuilleMatch #contentContener form{
+    display: table;
+    padding: 3%;
+    width: 80%;
+    margin: 0 auto;
+    border: #006e8c solid 2px;
+    margin-bottom: 2%;
+    border-radius: 40px;
+    font-size: 1.3em;
+}
+#feuilleMatch #contentContener form input[type=submit]{
+    font-size: 1em;
+    background-color: #006e8c;
+    border: none;
+    padding: 1%;
+    border-radius: 20px;
+    color: white;
+    font-weight: bolder;
+    height: fit-content;
+    margin-top: 2%;
+}
+#feuilleMatch #contentContener form input[type=submit]:hover{
+    background-color: white;
+    color: #006e8c;
+    border: #006e8c solid 3px;
+}
+#feuilleMatch #contentContener form .part{
+    margin-bottom: 5%;
+}
+#feuilleMatch #contentContener form input,textarea{
+    margin-left: 2%;
+}
+#feuilleMatch #contentContener form input[type=number]{
+    width: 15%;
+    font-size: 1em;
+    font-weight: bolder;
+}
 
 footer{
     background-color: white;

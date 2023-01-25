@@ -31,7 +31,6 @@
         <img src="../images/pp/" alt="">
         <div id="vue-match-content">
             <?php
-               
                 echo "<p> Adversaire : ".$data[3]."</p>
                     <p> Date : ".$data[1]."</p>
                     <p> Heure : ".$data[2]."</p>";
