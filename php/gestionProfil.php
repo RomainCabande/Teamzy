@@ -132,41 +132,50 @@
                         }
                     ?>
                     >--Choisissez un statut--</option>
-                    <option value="Titulaire"
+                    <option value="Actif"
                     <?php
                         if(isset($id)){
                             if(!strcmp($id,"add") == 0){
-                                if(strcmp($statu,"Titulaire") == 0 ){
+                                if(strcmp($statu,"Actif") == 0 ){
                                     echo "selected";
                                 }
                             }
                         }   
                     ?>
-                    >Titulaire</option>
-                    <option value="Remplaçant"
+                    >Actif</option>
+                    <option value="Blessé"
                     <?php
                     if(isset($id)){
                         if(!strcmp($id,"add") == 0){
-                            if(strcmp($statu,"Remplaçant") == 0 ){
+                            if(strcmp($statu,"Blessé") == 0 ){
                                 echo "selected";
                             }
                         }
-                    }
-                        
-                        
+                    }   
                     ?>
-                    >Remplaçant</option>
-                    <option value="Reserviste"
+                    >Blessé</option>
+                    <option value="Suspendu"
                     <?php
                         if(isset($id)){
                             if(isset($id) || !strcmp($id,"add") == 0){
-                                if(strcmp($statu,"Reserviste") == 0 ){
+                                if(strcmp($statu,"Suspendu") == 0 ){
                                     echo "selected";
                                 }
                             }
                         }    
                     ?>
-                    >Reserviste</option>
+                    >Suspendu</option>
+                    <option value="Absent"
+                    <?php
+                        if(isset($id)){
+                            if(isset($id) || !strcmp($id,"add") == 0){
+                                if(strcmp($statu,"Absent") == 0 ){
+                                    echo "selected";
+                                }
+                            }
+                        }    
+                    ?>
+                    >Absent</option>
                 </select>
                 <label for="poste">Poste :</label>
                 <select name="poste" >
