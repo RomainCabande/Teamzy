@@ -17,7 +17,12 @@
             }
         }    
     }
-
+    if(isset($_GET['player_id_supp'])){
+        $req = $bdd->prepare("DELETE FROM `jouer` WHERE `jouer`.`numero_licence` = :numero_licence AND `jouer`.`id_match` = :id_match");
+        $req->execute(array('numero_licence' => $_GET['player_id_supp'],
+                            'id_match' => $_GET['id']
+                            ));
+    }
     //select matchs data for id
     if(isset($_GET['id'])) {
         $id = $_GET['id'];
@@ -28,9 +33,10 @@
 
     //insert players into match team
     if(isset($_GET['id']) and isset($_GET['player_id'])) {
-        $req = $bdd->prepare("INSERT INTO `jouer` (`note_joueur`, `titulaire`, `commentaire`, `numero_licence`, `id_match`) VALUES (NULL, NULL, NULL, :numero_licence, :id_match)");
-        $req->execute(array('id_match' => $_GET['id'],
-                            'numero_licence' => $_GET['player_id']));
+        $req = $bdd->prepare("INSERT INTO `jouer` (`numero_licence`, `id_match`) VALUES (:numero_licence, :id_match)");
+        $req->execute(array('numero_licence' => $_GET['player_id'],
+                            'id_match' => $_GET['id']
+                            ));
     }
  
 ?>
@@ -90,14 +96,17 @@
                 </thead>
                 <?PHP
                     //players display
-                    $res = $bdd->prepare("SELECT joueur.* FROM joueur, jouer, matchs WHERE joueur.numero_licence = jouer.numero_licence and matchs.id_match = jouer.id_match");
-                    $res->execute();
+                    $res = $bdd->prepare("SELECT joueur.* FROM joueur, jouer WHERE joueur.numero_licence = jouer.numero_licence and jouer.id_match = ?");
+                    $res->execute(array($_GET['id']));
                     foreach ($res as $row){
                         echo"<tr>
                                 <td>{$row['prenom']}</td>
                                 <td>{$row['nom']}</td>
                                 <td>{$row['poste_prefere']}</td>
-                                <td><a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                                <td>
+                                    <a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a>
+                                    <a href='modifierMatch.php?player_id_supp={$row['numero_licence']}&id={$_GET['id']}'><img src='../images/minus.svg' alt=''></a>
+                                </td>\n";
                     }
                 ?>
             </table>
@@ -136,8 +145,8 @@
                         }
                     //players display no keyword
                     }else{
-                        $res = $bdd->prepare("SELECT joueur.* FROM joueur");
-                        $res->execute();
+                        $res = $bdd->prepare("SELECT DISTINCT joueur.* FROM Jouer,joueur Where joueur.numero_licence NOT IN (Select jouer.numero_licence FROM jouer WHERE jouer.id_match = ?);");
+                        $res->execute(array($_GET['id']));
                         foreach ($res as $row){
                             echo "  <tr> 
                                         <td>{$row['prenom']}</td>
@@ -145,7 +154,7 @@
                                         <td>{$row['poste_prefere']}</td>
                                         <td>
                                             <a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a>
-                                            <a href='modifierMatch.php?player_id={$row['numero_licence']}&id={$_GET['id']}'><img src='../images/add.png' alt=''></a>
+                                            <a href='modifierMatch.php?player_id={$row['numero_licence']}&id={$_GET['id']}'><img src='../images/add.svg' alt=''></a>
                                         </td>
                                     <tr>\n";
                         }

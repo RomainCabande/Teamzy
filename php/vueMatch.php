@@ -4,10 +4,12 @@
         $id = $_GET['id'];
         $rs = $bdd->prepare("SELECT matchs.* from matchs where id_match = $id");
         $rs->execute();
-        $data = $rs->fetch(PDO::FETCH_NUM);      
+        $data = $rs->fetch(PDO::FETCH_NUM);
+        $rs2 = $bdd->prepare("SELECT COUNT(matchs.id_match) FROM matchs WHERE matchs.id_match = ? AND id_match IN (SELECT matchs.id_match From matchs where matchs.date_match < NOW())");
+        $rs2->execute(array($_GET['id']));
+        $todate = $rs2->fetch(PDO::FETCH_NUM);
+
     } 
-    
-    
     
 ?>
 <html lang="en">
@@ -34,7 +36,18 @@
                 echo "<p> Adversaire : ".$data[3]."</p>
                     <p> Date : ".$data[1]."</p>
                     <p> Heure : ".$data[2]."</p>";
+                if($todate == 1):
             ?>
+
+            <form action="vueMatch" method="post">
+                    <label for="enemy">Score Adverse </label>
+                    <input type="int" name="enemy" min=0>
+                    <label for="us">Score Adverse </label>
+                    <input type="int" name="us" min=0>
+                    <input type="submit">
+            </form>
+
+            <?php endif; ?>
         </div>
         <table id="table-joueurs">
             <thead>
