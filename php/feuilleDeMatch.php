@@ -2,9 +2,15 @@
     $idJ = $_GET['idJ'];
     $idM = $_GET['idM'];
     $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
-    $req = $bdd->prepare("SELECT * FROM `joueur` WHERE joueur.numero_licence = ?;");
+    $req = $bdd->prepare("SELECT jouer.titulaire,joueur.*  FROM `joueur`,jouer WHERE jouer.numero_licence = joueur.numero_licence AND joueur.numero_licence = ?;");
     $req->execute(array($idJ));
     $data = $req->fetch(PDO::FETCH_NUM);
+    if($data[0] == 1){
+        $isRemplaçant = $data[0];
+    }else if($data[0] == 0){
+        $isRemplaçant = $data[0];
+    }
+    
 ?>
 <html lang="en" id="feuilleMatch">
 <head>
@@ -37,49 +43,35 @@
                     <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
                     <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
                 </div>
+                <label for="statut">Statut :</label>
                 <select name="statut">
                     <option value=""
                     <?php
-                        if(!isset($_GET['id'])){
+                        if(!isset($isRemplaçant)){
                             echo "selected";
                         }
                     ?>
                     >--Choisissez un statut--</option>
                     <option value="Titulaire"
                     <?php
-                        if(isset($id)){
-                            if(!strcmp($id,"add") == 0){
-                                if(strcmp($statu,"Titulaire") == 0 ){
+                        if(isset($isRemplaçant)){
+                                if($isRemplaçant == 1 ){
                                     echo "selected";
                                 }
-                            }
                         }   
                     ?>
                     >Titulaire</option>
                     <option value="Remplaçant"
                     <?php
-                    if(isset($id)){
-                        if(!strcmp($id,"add") == 0){
-                            if(strcmp($statu,"Remplaçant") == 0 ){
-                                echo "selected";
-                            }
+                    if(isset($isRemplaçant)){
+                        if($isRemplaçant == 0 ){
+                            echo "selected";
                         }
                     }
                         
                         
                     ?>
                     >Remplaçant</option>
-                    <option value="Reserviste"
-                    <?php
-                        if(isset($id)){
-                            if(isset($id) || !strcmp($id,"add") == 0){
-                                if(strcmp($statu,"Reserviste") == 0 ){
-                                    echo "selected";
-                                }
-                            }
-                        }    
-                    ?>
-                    >Reserviste</option>
                 </select>
             </div>
             <div class="part">

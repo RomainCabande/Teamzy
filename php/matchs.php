@@ -49,8 +49,8 @@
             <input type="search" name="search" placeholder="Rechercher ...">
             <input type="submit" value="Rechercher">
         </form>
-        <a href="matchs.php?filtre=futur">Matchs à venir</a>
-        <a href="matchs.php?filtre=passe">Matchs passés</a>
+            <a href="matchs.php?filtre=futur" id="btnFiltre">Matchs à venir</a>
+            <a href="matchs.php?filtre=passe">Matchs passés</a>
         </div>
         <table id="tableMatchs">
             <thead>
@@ -66,32 +66,32 @@
                 if(isset($_GET['filtre'])){
                     if(strcmp($_GET['filtre'],"futur") == 0){
                         if(isset($keyword)){
-                            $res = $bdd->prepare("SELECT m.* FROM matchs as m WHERE UPPER(concat(date_match,heure,nom_equipe_adverse,lieu)) LIKE UPPER('%$keyword%') AND matchs.heure < NOW()");
+                            $res = $bdd->prepare("SELECT m.* FROM matchs as m WHERE UPPER(concat(date_match,heure,nom_equipe_adverse,lieu)) LIKE UPPER('%$keyword%') AND concat(matchs.date_match, ' ', matchs.heure) > NOW()");
                             $res->execute();
                         }else{
                             $res = $bdd->prepare("SELECT matchs.* FROM matchs Where concat(matchs.date_match, ' ', matchs.heure) > NOW()");
                             $res->execute();
                             foreach ($res as $row){
-                                echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                                echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a></td>\n";
                             }
                         }
                         foreach ($res as $row){
-                            echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                            echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a></td>\n";
                         }  
                     }elseif(strcmp($_GET['filtre'],"passe") == 0){
                         if(isset($keyword)){
 
-                            $res = $bdd->prepare("SELECT m.* FROM matchs as m WHERE UPPER(concat(date_match,heure,nom_equipe_adverse,lieu)) LIKE UPPER('%$keyword%') AND matchs.heure > NOW()");
+                            $res = $bdd->prepare("SELECT m.* FROM matchs as m WHERE UPPER(concat(date_match,heure,nom_equipe_adverse,lieu)) LIKE UPPER('%$keyword%') AND concat(matchs.date_match, ' ', matchs.heure) < NOW()");
                             $res->execute();
                         }else{
                             $res = $bdd->prepare("SELECT matchs.* FROM matchs Where concat(matchs.date_match, ' ', matchs.heure) < NOW()");
                             $res->execute();
                             foreach ($res as $row){
-                            echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                            echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a></td>\n";
                             }
                         }
                         foreach ($res as $row){
-                            echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='modifierMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/voir.svg' alt=''></a></td>\n";
+                            echo"<tr><td>{$row['date_match']}</td><td>{$row['nom_equipe_adverse']}</td><td>{$row['lieu']}</td><td><a href='matchs.php?id={$row['id_match']}'><img src='../images/supp.svg' alt=''></a><a href='vueMatch.php?id={$row['id_match']}'><img src='../images/modif.svg' alt=''></a></td>\n";
                         } 
                     }
                 }else{

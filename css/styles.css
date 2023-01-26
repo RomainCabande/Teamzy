@@ -395,7 +395,10 @@ body p{
     text-decoration: none;
     border-radius: 40px;
     background-color: #006e8c;
-    margin-left: 10%;
+    margin-left: 2%;
+}
+#match #contentContener #tab-top-bar #btnFiltre{
+    margin-left: 30%;
 }
 #Gprofil #contentContener {
     display: table;

@@ -60,7 +60,7 @@
                     $res = $bdd->prepare("SELECT matchs.*,jouer.*,joueur.* FROM jouer,matchs,joueur WHERE matchs.id_match = jouer.id_match AND jouer.numero_licence = ? AND jouer.numero_licence =joueur.numero_licence ;");
                     $res->execute(array($_GET['id']));
                     foreach ($res as $row){
-                        echo"<tr><td>{$row['nom']}"." "."{$row['prenom']}</td><td>{$row['poste_prefere']}</td></tr>\n";
+                        echo"<tr><td>{$row['nom']}"." "."{$row['prenom']}</td><td>{$row['poste_prefere']}</td><td><a href='feuilleDeMatch.php?idJ={$row['numero_licence']}&idM=$id'><img src='../images/feuille.svg' alt=''></a></td></tr>\n";
                     }
                 }
                 
