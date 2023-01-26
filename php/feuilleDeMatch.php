@@ -37,6 +37,50 @@
                     <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
                     <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
                 </div>
+                <select name="statut">
+                    <option value=""
+                    <?php
+                        if(!isset($_GET['id'])){
+                            echo "selected";
+                        }
+                    ?>
+                    >--Choisissez un statut--</option>
+                    <option value="Titulaire"
+                    <?php
+                        if(isset($id)){
+                            if(!strcmp($id,"add") == 0){
+                                if(strcmp($statu,"Titulaire") == 0 ){
+                                    echo "selected";
+                                }
+                            }
+                        }   
+                    ?>
+                    >Titulaire</option>
+                    <option value="Remplaçant"
+                    <?php
+                    if(isset($id)){
+                        if(!strcmp($id,"add") == 0){
+                            if(strcmp($statu,"Remplaçant") == 0 ){
+                                echo "selected";
+                            }
+                        }
+                    }
+                        
+                        
+                    ?>
+                    >Remplaçant</option>
+                    <option value="Reserviste"
+                    <?php
+                        if(isset($id)){
+                            if(isset($id) || !strcmp($id,"add") == 0){
+                                if(strcmp($statu,"Reserviste") == 0 ){
+                                    echo "selected";
+                                }
+                            }
+                        }    
+                    ?>
+                    >Reserviste</option>
+                </select>
             </div>
             <div class="part">
                 <div>
