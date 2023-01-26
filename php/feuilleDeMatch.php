@@ -2,13 +2,16 @@
     $idJ = $_GET['idJ'];
     $idM = $_GET['idM'];
     $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
-    $req = $bdd->prepare("SELECT jouer.titulaire,joueur.*  FROM `joueur`,jouer WHERE jouer.numero_licence = joueur.numero_licence AND joueur.numero_licence = ?;");
-    $req->execute(array($idJ));
+    $req = $bdd->prepare("SELECT jouer.titulaire, jouer.note_joueur,jouer.commentaire,joueur.*  FROM `joueur`,jouer WHERE jouer.numero_licence = joueur.numero_licence AND joueur.numero_licence = ? AND jouer.id_match = ?;");
+    $req->execute(array($idJ,$idM));
     $data = $req->fetch(PDO::FETCH_NUM);
     if($data[0] == 1){
         $isRemplaçant = $data[0];
     }else if($data[0] == 0){
         $isRemplaçant = $data[0];
+    }
+    if($data[1] != 0){
+        $note = $data[1];
     }
     
 ?>
@@ -29,19 +32,60 @@
 </header>
 <body>
     <div id="contentContener">
-        <h1>Feuille de match de <?PHP echo $data[1]." ".$data[2] ?></h1>
-        <form action="modifierMatch.php" method="GET">
+        <h1>Feuille de match de <?PHP echo $data[4]." ".$data[5] ?></h1>
+        <form action="VueMatch.php" method="GET">
             <div class="part">
-                <input type="hidden" name="idJ" value="<?PHP echo $data[1] ?>">
+                <input type="hidden" name="idJ" value="<?PHP echo $data[3] ?>">
+                <input type="hidden" name="id" value="<?PHP echo $idM ?>">
                 <div>
                    <label for="note">Note du match</label> 
                 </div>
                 <div class="rating">
-                    <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-                    <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
-                    <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
-                    <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
-                    <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                    <input type="radio" name="rating" value="1" id="1" 
+                    <?php 
+                    if(isset($note)){
+                        if($note == 1){
+                            echo " checked='checked' ";
+                        }
+                    } 
+                    ?>
+                    ><label for="1">☆</label>
+                    <input type="radio" name="rating" value="2" id="2"
+                    <?php 
+                    if(isset($note)){
+                        if($note == 2){
+                            echo " checked='checked' ";
+                        }
+                    } 
+                    ?>
+                    ><label for="2">☆</label>
+                    <input type="radio" name="rating" value="3" id="3"
+                    <?php 
+                    if(isset($note)){
+                        if($note == 3){
+                            echo " checked='checked' ";
+                        }
+                    } 
+                    ?>
+                    ><label for="3">☆</label>
+                    <input type="radio" name="rating" value="4" id="4"
+                    <?php 
+                    if(isset($note)){
+                        if($note == 4){
+                            echo " checked='checked' ";
+                        }
+                    } 
+                    ?>
+                    ><label for="4">☆</label>
+                    <input type="radio" name="rating" value="5" id="5"
+                    <?php 
+                    if(isset($note)){
+                        if($note == 5){
+                            echo " checked='checked' ";
+                        }
+                    } 
+                    ?>
+                    ><label for="5">☆</label>
                 </div>
                 <label for="statut">Statut :</label>
                 <select name="statut">
@@ -52,7 +96,7 @@
                         }
                     ?>
                     >--Choisissez un statut--</option>
-                    <option value="Titulaire"
+                    <option value="1"
                     <?php
                         if(isset($isRemplaçant)){
                                 if($isRemplaçant == 1 ){
@@ -61,7 +105,7 @@
                         }   
                     ?>
                     >Titulaire</option>
-                    <option value="Remplaçant"
+                    <option value="0"
                     <?php
                     if(isset($isRemplaçant)){
                         if($isRemplaçant == 0 ){
@@ -79,7 +123,12 @@
                    <label for="com">Commentaire</label> 
                 </div>
                 
-                <textarea name="com" rows="5" cols="33">
+                <textarea name="com" rows="5" cols="33"  
+                ><?php 
+                    if(isset($data[2])){
+                            echo $data[2];
+                    } 
+                ?>
                 </textarea>
             </div>
             <div>

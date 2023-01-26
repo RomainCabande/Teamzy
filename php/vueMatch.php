@@ -5,10 +5,41 @@
         $rs = $bdd->prepare("SELECT matchs.* from matchs where id_match = $id");
         $rs->execute();
         $data = $rs->fetch(PDO::FETCH_NUM);
+        $rs3 = $bdd->prepare("SELECT count(id_match),score_adverse,score_equipe from matchs where id_match = $id AND score_adverse IS NOT NULL AND score_equipe IS NOT NULL ");
+        $rs3 ->execute();
+        $vic = $rs3->fetch(PDO::FETCH_NUM);
+        if($vic[0] = 1){
+            $us = $vic[1];
+            $enemy = $vic[2];
+        }
         $rs2 = $bdd->prepare("SELECT COUNT(matchs.id_match) FROM matchs WHERE matchs.id_match = ? AND id_match IN (SELECT matchs.id_match From matchs where concat(matchs.date_match, ' ', matchs.heure) < NOW())");
         $rs2->execute(array($_GET['id']));
         $todate = $rs2->fetch(PDO::FETCH_NUM);
-    } 
+    }
+    if(isset($_GET['idJ'])){
+        $id = $_GET['id'];
+        $rs = $bdd->prepare("SELECT matchs.* from matchs where id_match = $id");
+        $rs->execute();
+        $data = $rs->fetch(PDO::FETCH_NUM);
+        $rs2 = $bdd->prepare("UPDATE jouer SET note_joueur=:note,commentaire=:com,titulaire=:tit  WHERE numero_licence = :id");
+        $rs2->execute(array('note' => $_GET['rating'],
+                            'com'=> $_GET['com'],
+                            'tit'=> $_GET['statut'],
+                            'id'=> $_GET['idJ']));
+        $rs3 = $bdd->prepare("SELECT COUNT(matchs.id_match) FROM matchs WHERE matchs.id_match = ? AND id_match IN (SELECT matchs.id_match From matchs where concat(matchs.date_match, ' ', matchs.heure) < NOW())");
+        $rs3->execute(array($_GET['id']));
+        $todate = $rs3->fetch(PDO::FETCH_NUM);
+    }
+    if(isset($_POST['enemy'])){
+        if(isset($_POST['us'])){
+            $rs4 = $bdd->prepare("UPDATE match SET score_adverse=:enemy,score_equipe=:us WHERE id_match = :id");
+            $rs4->execute(array('enemy' => $_POST['enemy'],
+                                'us'=> $_POST['us'],
+                                'id'=> $_GET['id'])); 
+        }
+        $us =  $_POST['us'];
+        $enemy = $_POST['enemy'];
+    }
     
 ?>
 <html lang="en">
@@ -38,11 +69,22 @@
                 if($todate[0] == 1):
             ?>
 
-            <form action="vueMatch" method="post">
+            <form action="vueMatch.php" method="post">
+                    <input type="hidden" value=<?PHP echo $id ?>>
                     <label for="enemy">Score Adverse </label>
-                    <input type="number" name="enemy" min=0>
+                    <input type="number" name="enemy" min=0 value="
+                    <?PHP
+                        if(isset($enemy)){
+                            echo $enemy;
+                        }
+                    ?>">
                     <label for="us">Score Adverse </label>
-                    <input type="number" name="us" min=0>
+                    <input type="number" name="us" min=0 value="
+                    <?PHP
+                        if(isset($us)){
+                            echo $us;
+                        }
+                    ?>">
                     <input type="submit">
             </form>
 

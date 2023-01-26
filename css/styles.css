@@ -682,6 +682,21 @@ body p{
     border-radius: 40px;
     padding: 15px;
 }
+#vue-match #vue-match-content form input[type=submit]{
+    background-color: #006e8c;
+    border: none;
+    color: white;
+    font-weight: bolder;
+    font-size: 0.8em;
+    border-radius: 2em;
+    padding: 1%;
+}
+
+#vue-match #vue-match-content form input[type=submit]:hover{
+    background-color: white ;
+    color: #006e8c;
+    border: solid 3px #006e8c;
+}
 #feuilleMatch #contentContener {
     display: table;
     background-color: white;
