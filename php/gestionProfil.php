@@ -188,17 +188,17 @@
                         }
                     ?>
                     >--Choisissez un poste--</option>
-                    <option value="défenseur"
+                    <option value="Défenseur"
                     <?php
                         if(isset($id)){
                             if(!strcmp($id,"add") == 0){
-                                if(strcmp($poste,"défenseur") == 0 ){
+                                if(strcmp($poste,"Défenseur") == 0 ){
                                     echo "selected";
                                 }
                             }
                         }    
                     ?>
-                    >défenseur</option>
+                    >Défenseur</option>
                     <option value="Milieu défensif"  
                     <?php
                         if(isset($id)){
