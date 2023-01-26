@@ -1,7 +1,8 @@
 <?php
     $idJ = $_GET['idJ'];
     $idM = $_GET['idM'];
-    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
+    //DB connexion 
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'id20110031_teamzyadmin', 'D2|7M~R1PGs^Jm!W');
     $req = $bdd->prepare("SELECT jouer.titulaire, jouer.note_joueur,jouer.commentaire,joueur.*  FROM `joueur`,jouer WHERE jouer.numero_licence = joueur.numero_licence AND joueur.numero_licence = ? AND jouer.id_match = ?;");
     $req->execute(array($idJ,$idM));
     $data = $req->fetch(PDO::FETCH_NUM);
@@ -33,7 +34,7 @@
 <body>
     <div id="contentContener">
         <h1>Feuille de match de <?PHP echo $data[4]." ".$data[5] ?></h1>
-        <form action="VueMatch.php" method="GET">
+        <form action="vueMatch.php" method="GET">
             <div class="part">
                 <input type="hidden" name="idJ" value="<?PHP echo $data[3] ?>">
                 <input type="hidden" name="id" value="<?PHP echo $idM ?>">
@@ -132,7 +133,7 @@
                 </textarea>
             </div>
             <div>
-                <input type="submit" value="valider la feuille">
+                <input type="submit" value="Valider la feuille">
             </div>
         </form>
     </div>

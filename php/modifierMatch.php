@@ -1,6 +1,6 @@
 <?php
     //DB connexion
-    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'id20110031_teamzyadmin', 'D2|7M~R1PGs^Jm!W');
 
     //update match for id
     if(isset($_GET['date'])) {
@@ -17,6 +17,7 @@
             }
         }    
     }
+    //delete players of match team
     if(isset($_GET['player_id_supp'])){
         $req = $bdd->prepare("DELETE FROM `jouer` WHERE `jouer`.`numero_licence` = :numero_licence AND `jouer`.`id_match` = :id_match");
         $req->execute(array('numero_licence' => $_GET['player_id_supp'],
@@ -95,7 +96,7 @@
                     </tr>
                 </thead>
                 <?PHP
-                    //players display
+                    //match team players display
                     $res = $bdd->prepare("SELECT joueur.* FROM joueur, jouer WHERE joueur.numero_licence = jouer.numero_licence and jouer.id_match = ?");
                     $res->execute(array($_GET['id']));
                     foreach ($res as $row){
@@ -127,11 +128,11 @@
                     </tr>
                 </thead>
                 <?PHP
-                    //players display with keyword filter
+                    //all players display with keyword filter
                     if(isset($_GET['search'])){
                         $keyword = $_GET['search'];
-                        $res = $bdd->prepare("SELECT joueur.* FROM joueur WHERE UPPER(concat(nom,prenom,poste_prefere,numero_licence)) LIKE UPPER('%$keyword%');");
-                        $res->execute();
+                        $res = $bdd->prepare("SELECT joueur.* FROM joueur WHERE joueur.statut = 'Actif' AND UPPER(concat(nom,prenom,poste_prefere,numero_licence)) LIKE UPPER('%$keyword%') AND joueur.numero_licence NOT IN (Select jouer.numero_licence FROM jouer WHERE jouer.id_match = ?)");
+                        $res->execute(array($_GET['id']));
                         foreach ($res as $row){
                             echo "  <tr> 
                                         <td>{$row['prenom']}</td>
@@ -143,9 +144,9 @@
                                         </td>
                                     <tr>\n";
                         }
-                    //players display no keyword
+                    //all players display no keyword
                     }else{
-                        $res = $bdd->prepare("SELECT DISTINCT joueur.* FROM Jouer,joueur Where joueur.numero_licence NOT IN (Select jouer.numero_licence FROM jouer WHERE jouer.id_match = ?);");
+                        $res = $bdd->prepare("SELECT DISTINCT joueur.* FROM jouer,joueur Where joueur.statut = 'Actif' AND joueur.numero_licence NOT IN (Select jouer.numero_licence FROM jouer WHERE jouer.id_match = ?)");
                         $res->execute(array($_GET['id']));
                         foreach ($res as $row){
                             echo "  <tr> 

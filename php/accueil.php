@@ -1,18 +1,19 @@
 <?php
-    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
-    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM Matchs WHERE matchs.score_adverse < matchs.score_equipe;");
+    //DB connexion 
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'id20110031_teamzyadmin', 'D2|7M~R1PGs^Jm!W');
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs WHERE matchs.score_adverse < matchs.score_equipe;");
     $req->execute();
     $data = $req->fetch(PDO::FETCH_NUM);
     $nbVictoire = $data[0];
-    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM Matchs WHERE matchs.score_adverse > matchs.score_equipe;");
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs WHERE matchs.score_adverse > matchs.score_equipe;");
     $req->execute();
     $data = $req->fetch(PDO::FETCH_NUM);
     $nbDefaite = $data[0];
-    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM Matchs WHERE matchs.score_adverse = matchs.score_equipe;");
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs WHERE matchs.score_adverse = matchs.score_equipe;");
     $req->execute();
     $data = $req->fetch(PDO::FETCH_NUM);
     $nbEgalite = $data[0];
-    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM Matchs");
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs");
     $req->execute();
     $data = $req->fetch(PDO::FETCH_NUM);
     $nbMatchs = $data[0];
@@ -46,9 +47,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><?php echo ($nbVictoire*100)/$nbMatchs ?>% (<?php echo $nbVictoire ?>)</td>
-                    <td><?php echo ($nbDefaite*100)/$nbMatchs ?>% (<?php echo $nbDefaite ?>)</td>
-                    <td><?php echo ($nbEgalite*100)/$nbMatchs ?>% (<?php echo $nbEgalite ?>)</td>
+                    <td><?php if($nbMatchs != 0){echo ($nbVictoire*100)/$nbMatchs;}else{echo "0";} ?>% (<?php echo $nbVictoire ?>)</td>
+                    <td><?php if($nbMatchs != 0){echo ($nbDefaites*100)/$nbMatchs;}else{echo "0";} ?>% (<?php echo $nbDefaite ?>)</td>
+                    <td><?php if($nbMatchs != 0){echo ($nbEgalitée*100)/$nbMatchs;}else{echo "0";} ?>% (<?php echo $nbEgalite ?>)</td>
                 </tr>
             </tbody>
         </table>
@@ -63,13 +64,12 @@
                 </tr>
             </thead>
             <tbody>
-                
                     <?PHP
-                    $res = $bdd->prepare("SELECT COUNT(jouer.id_match),joueur.nom,joueur.prenom,joueur.poste_prefere FROM `joueur`,jouer WHERE jouer.numero_licence = joueur.numero_licence ORDER BY COUNT(jouer.id_match) ASC");
-                    $res->execute();
-                    foreach ($res as $row){
-                        echo"<tr><td>{$row[0]}</td><td>{$row['nom']} {$row['prenom']}</td><td>{$row['poste_prefere']}</td>\n";
-                    }
+                        $res = $bdd->prepare("SELECT COUNT(jouer.id_match),joueur.nom,joueur.prenom,joueur.poste_prefere FROM `joueur`,jouer WHERE jouer.numero_licence = joueur.numero_licence ORDER BY COUNT(jouer.id_match) ASC");
+                        $res->execute();
+                        foreach ($res as $row){
+                            echo"<tr><td>{$row[0]}</td><td>{$row['nom']} {$row['prenom']}</td><td>{$row['poste_prefere']}</td>\n";
+                        }
                     ?>
                 
             </tbody>

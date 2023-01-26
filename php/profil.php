@@ -1,5 +1,6 @@
 <?php
-    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
+    //DB connexion 
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'id20110031_teamzyadmin', 'D2|7M~R1PGs^Jm!W');
     $id = $_GET['id'];
     $req = $bdd->prepare("SELECT ROUND(AVG(jouer.note_joueur),1) FROM `jouer` WHERE jouer.numero_licence = ?;");
     $req->execute(array($id));

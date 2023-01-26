@@ -1,10 +1,15 @@
 <?php
-    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
+    //BD connexion
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'id20110031_teamzyadmin', 'D2|7M~R1PGs^Jm!W');
+
+    //select match data for id
     if(isset($_GET['id'])){
         $id = $_GET['id'];
         $rs = $bdd->prepare("SELECT matchs.* from matchs where id_match = $id");
         $rs->execute();
         $data = $rs->fetch(PDO::FETCH_NUM);
+        $us = $data[6];
+        $enemy = $data[5];
         $rs3 = $bdd->prepare("SELECT count(id_match),score_adverse,score_equipe from matchs where id_match = $id AND score_adverse IS NOT NULL AND score_equipe IS NOT NULL ");
         $rs3 ->execute();
         $vic = $rs3->fetch(PDO::FETCH_NUM);
@@ -16,6 +21,8 @@
         $rs2->execute(array($_GET['id']));
         $todate = $rs2->fetch(PDO::FETCH_NUM);
     }
+
+    //update match player rating, comments and status for  
     if(isset($_GET['idJ'])){
         $id = $_GET['id'];
         $rs = $bdd->prepare("SELECT matchs.* from matchs where id_match = $id");
@@ -30,15 +37,15 @@
         $rs3->execute(array($_GET['id']));
         $todate = $rs3->fetch(PDO::FETCH_NUM);
     }
-    if(isset($_POST['enemy'])){
-        if(isset($_POST['us'])){
-            $rs4 = $bdd->prepare("UPDATE match SET score_adverse=:enemy,score_equipe=:us WHERE id_match = :id");
-            $rs4->execute(array('enemy' => $_POST['enemy'],
-                                'us'=> $_POST['us'],
+
+    //update match score
+    if(isset($_GET['enemy'])){
+        if(isset($_GET['us'])){
+            $rs4 = $bdd->prepare("UPDATE matchs SET score_adverse=:enemy,score_equipe=:us WHERE id_match = :id");
+            $rs4->execute(array('enemy' => $_GET['enemy'],
+                                'us'=> $_GET['us'],
                                 'id'=> $_GET['id'])); 
         }
-        $us =  $_POST['us'];
-        $enemy = $_POST['enemy'];
     }
     
 ?>
@@ -68,27 +75,16 @@
                     <p> Heure : ".$data[2]."</p>";
                 if($todate[0] == 1):
             ?>
+            <?php endif; ?>
 
-            <form action="vueMatch.php" method="post">
-                    <input type="hidden" value=<?PHP echo $id ?>>
+            <form action="vueMatch.php" method="get">
+                    <input type="hidden" name="id" value="<?PHP echo $id; ?>">
                     <label for="enemy">Score Adverse </label>
-                    <input type="number" name="enemy" min=0 value="
-                    <?PHP
-                        if(isset($enemy)){
-                            echo $enemy;
-                        }
-                    ?>">
-                    <label for="us">Score Adverse </label>
-                    <input type="number" name="us" min=0 value="
-                    <?PHP
-                        if(isset($us)){
-                            echo $us;
-                        }
-                    ?>">
+                    <input type="number" name="enemy" min=0 value="<?PHP if(isset($_GET['us'])){echo $_GET['us'];} else { echo $us;}?>">
+                    <label for="us">Score Equipe </label>
+                    <input type="number" name="us" min=0 value="<?PHP if(isset($_GET['enemy'])){echo $_GET['enemy'];} else { echo $enemy;}?>">
                     <input type="submit">
             </form>
-
-            <?php endif; ?>
         </div>
         <table id="table-joueurs">
             <thead>
@@ -98,8 +94,9 @@
                     </tr>
             </thead>
             <?PHP
+                //display match players
                 if(isset($_GET['id'])){
-                    $res = $bdd->prepare("SELECT matchs.*,jouer.*,joueur.* FROM jouer,matchs,joueur WHERE matchs.id_match = jouer.id_match AND jouer.numero_licence = ? AND jouer.numero_licence =joueur.numero_licence ;");
+                    $res = $bdd->prepare("SELECT matchs.*,jouer.*,joueur.* FROM jouer,matchs,joueur WHERE matchs.id_match = jouer.id_match AND matchs.id_match = ? AND jouer.numero_licence =joueur.numero_licence ;");
                     $res->execute(array($_GET['id']));
                     foreach ($res as $row){
                         echo"<tr><td>{$row['nom']}"." "."{$row['prenom']}</td><td>{$row['poste_prefere']}</td><td><a href='feuilleDeMatch.php?idJ={$row['numero_licence']}&idM=$id'><img src='../images/feuille.svg' alt=''></a></td></tr>\n";

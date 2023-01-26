@@ -1,11 +1,11 @@
 <?PHP
-    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
+    //DB connexion 
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'id20110031_teamzyadmin', 'D2|7M~R1PGs^Jm!W');
     if(isset($_GET['id'])){
         if(isset($_GET['add'])){
             if(strcmp($_GET['add'],"add") == 0){
                 $add = $bdd->prepare("INSERT INTO joueur(nom, prenom,taille,poids,date_naissance,statut,poste_prefere)
                 VALUES(:nom, :prenom, :taille, :poid, :dn, :statut, :poste)");
-                ///Exécution de la requête
                 $add->execute(array('nom' => $_GET['nom'],
                                         'prenom'=> $_GET['prenom'],
                                         'taille'=> $_GET['taille'],
@@ -49,12 +49,11 @@
     if(isset($_POST['id'])){
         $id = $_POST['id']; 
     }
-    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
     if(isset($_FILES['avatar']))
     { 
         $dossier = '../images/pp/';
         $fichier = basename($_FILES['avatar']['name']);
-        if(move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+        if(move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier))
         {
             $ajout = $bdd->prepare('UPDATE joueur SET photo_link = :picname WHERE numero_licence = :id');
             $ajout->execute(array('picname' => $fichier,'id' => $id));

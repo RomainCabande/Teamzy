@@ -1,9 +1,9 @@
 <?php
-    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
+    //DB connexion
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'id20110031_teamzyadmin', 'D2|7M~R1PGs^Jm!W');
     if(isset($_GET['date']) and $_GET['date'] != "" and isset($_GET['time']) and $_GET['time'] != "" and isset($_GET['nomEquipeAdverse']) and $_GET['nomEquipeAdverse'] != "" and isset($_GET['lieu']) and $_GET['lieu'] != ""){
         $add = $bdd->prepare("INSERT INTO matchs(date_match, heure, nom_equipe_adverse, lieu, score_adverse, score_equipe)
         VALUES(:dateMatch, :heure, :nomEquipeAdv, :lieu, :scoreAdv, :scoreEqu)");
-        //Exécution de la requête
         $add->execute(array('dateMatch' => $_GET['date'],
                             'heure'=> $_GET['time'],
                             'nomEquipeAdv'=> $_GET['nomEquipeAdverse'],
@@ -61,8 +61,6 @@
                 </tr>
             </thead>
             <?PHP
-                //Connexion au serveur MySQL
-                $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
                 if(isset($_GET['filtre'])){
                     if(strcmp($_GET['filtre'],"futur") == 0){
                         if(isset($keyword)){

@@ -1,6 +1,7 @@
 <?php
+    //DB connexion
+    $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'id20110031_teamzyadmin', 'D2|7M~R1PGs^Jm!W');
     if(isset($_GET['id'])){
-        $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
         $req = $bdd->prepare("DELETE FROM joueur
         WHERE numero_licence = ?");
         $req->execute(array($_GET['id']));
@@ -48,18 +49,7 @@
                 </tr>
             </thead>
             <?PHP
-                ///Connexion au serveur MySQL
-                $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'root', '');
                 if(isset($keyword)){
-                    
-                    
-                    /* 
-                    $res = $bdd->prepare("SELECT * FROM contact ");
-                    $res->execute();
-                    
-                    $data = $res->fetchAll();
-                    print_r($data);
-                    */
                     
                     $res = $bdd->prepare("SELECT joueur.* FROM joueur WHERE UPPER(concat(nom,prenom,poste_prefere,numero_licence)) LIKE UPPER('%$keyword%');");
                     $res->execute();
@@ -71,10 +61,6 @@
                 }
                 }
 
-                // while ($row = $res->fetch()) {
-                //     echo"<tr><td>{$row['nom']}</td><td>{$row['prenom']}</td><td>{$row['adresse']}
-                //     </td><td>{$row['codepostal']}</td><td>{$row['ville']}</td><td>{$row['telephone']}</td>\n";
-                // }
                 foreach ($res as $row){
                     echo"<tr><td>{$row['prenom']}</td><td>{$row['nom']}</td><td>{$row['poste_prefere']}</td><td><a href='joueurs.php?id={$row['numero_licence']}'><img src='../images/supp.svg' alt=''></a><a href='gestionProfil.php?id={$row['numero_licence']}'><img src='../images/modif.svg' alt=''></a><a href='profil.php?id={$row['numero_licence']}'><img src='../images/voir.svg' alt=''></a></td>\n";
                 }
