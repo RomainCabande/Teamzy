@@ -742,7 +742,7 @@ body p{
     position: relative;
     width: 0.5em;
     font-size: 3vw;
-    color: #FFD700;
+    color: gray;
     cursor: pointer;
     margin: 0%;
 }
@@ -758,6 +758,12 @@ body p{
 #feuilleMatch #contentContener form .rating label:hover { 
     opacity: 0.4;
 }
+#feuilleMatch #contentContener form .rating input:checked + label,
+#feuilleMatch #contentContener form .rating input:focus + label{
+   font-size: 3.5vw;
+   color: #FFD700;
+}
+
 
 footer{
     background-color: white;
