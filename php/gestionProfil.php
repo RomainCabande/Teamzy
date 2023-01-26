@@ -188,17 +188,17 @@
                         }
                     ?>
                     >--Choisissez un poste--</option>
-                    <option value="Arrière latéral"
+                    <option value="défenseur"
                     <?php
                         if(isset($id)){
                             if(!strcmp($id,"add") == 0){
-                                if(strcmp($poste,"Arrière latéral") == 0 ){
+                                if(strcmp($poste,"défenseur") == 0 ){
                                     echo "selected";
                                 }
                             }
                         }    
                     ?>
-                    >Arrière latéral</option>
+                    >défenseur</option>
                     <option value="Milieu défensif"  
                     <?php
                         if(isset($id)){
