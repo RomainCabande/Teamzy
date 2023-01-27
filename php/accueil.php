@@ -1,19 +1,19 @@
 <?php
     //DB connexion 
     $bdd = new PDO("mysql:host=localhost;dbname=id20110031_teamzydb", 'id20110031_teamzyadmin', 'D2|7M~R1PGs^Jm!W');
-    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs WHERE matchs.score_adverse < matchs.score_equipe;");
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs WHERE matchs.score_adverse < matchs.score_equipe AND concat(matchs.date_match, ' ', matchs.heure) < NOW()");
     $req->execute();
     $data = $req->fetch(PDO::FETCH_NUM);
     $nbVictoire = $data[0];
-    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs WHERE matchs.score_adverse > matchs.score_equipe;");
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs WHERE matchs.score_adverse > matchs.score_equipe AND concat(matchs.date_match, ' ', matchs.heure) < NOW()");
     $req->execute();
     $data = $req->fetch(PDO::FETCH_NUM);
     $nbDefaite = $data[0];
-    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs WHERE matchs.score_adverse = matchs.score_equipe;");
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs WHERE matchs.score_adverse = matchs.score_equipe AND concat(matchs.date_match, ' ', matchs.heure) < NOW()");
     $req->execute();
     $data = $req->fetch(PDO::FETCH_NUM);
     $nbEgalite = $data[0];
-    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs");
+    $req = $bdd->prepare("SELECT count(matchs.id_match) FROM matchs WHERE concat(matchs.date_match, ' ', matchs.heure) < NOW()");
     $req->execute();
     $data = $req->fetch(PDO::FETCH_NUM);
     $nbMatchs = $data[0];
@@ -48,8 +48,8 @@
             <tbody>
                 <tr>
                     <td><?php if($nbMatchs != 0){echo ($nbVictoire*100)/$nbMatchs;}else{echo "0";} ?>% (<?php echo $nbVictoire ?>)</td>
-                    <td><?php if($nbMatchs != 0){echo ($nbDefaites*100)/$nbMatchs;}else{echo "0";} ?>% (<?php echo $nbDefaite ?>)</td>
-                    <td><?php if($nbMatchs != 0){echo ($nbEgalitée*100)/$nbMatchs;}else{echo "0";} ?>% (<?php echo $nbEgalite ?>)</td>
+                    <td><?php if($nbMatchs != 0){echo ($nbDefaite*100)/$nbMatchs;}else{echo "0";} ?>% (<?php echo $nbDefaite ?>)</td>
+                    <td><?php if($nbMatchs != 0){echo ($nbEgalite*100)/$nbMatchs;}else{echo "0";} ?>% (<?php echo $nbEgalite ?>)</td>
                 </tr>
             </tbody>
         </table>
